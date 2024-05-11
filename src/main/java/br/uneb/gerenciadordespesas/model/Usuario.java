@@ -53,14 +53,55 @@ public final class Usuario {
     }
 
     public Double getValorTotal() {
+        Double soma = 0d;
+
+        for (Despesa despesa : despesas) {
+            soma += despesa.getPreco();
+        }
+
+        valorTotal = soma;
+
         return valorTotal;
     }
 
     public Double getValorJaPago() {
+        Double soma = 0d;
+
+        for (Despesa despesa : despesas) {
+            if (despesa.getPago()) {
+                soma += despesa.getPreco();
+            }
+        }
+
+        valorJaPago = soma;
+
         return valorJaPago;
     }
 
     public Double getValorPendente() {
+        Double soma = 0d;
+
+        for (Despesa despesa : despesas) {
+            if (!despesa.getPago()) {
+                soma += despesa.getPreco();
+            }
+        }
+
+        valorPendente = soma;
+
         return valorPendente;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", despesas=" + despesas +
+                ", valorTotal=" + valorTotal +
+                ", valorJaPago=" + valorJaPago +
+                ", valorPendente=" + valorPendente +
+                '}';
     }
 }

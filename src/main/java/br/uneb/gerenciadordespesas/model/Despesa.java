@@ -60,6 +60,17 @@ public final class Despesa {
         return pago;
     }
 
+    @Override
+    public String toString() {
+        return "Despesa{" +
+                "nome='" + nome + '\'' +
+                ", preco=" + preco +
+                ", categoria=" + categoria +
+                ", dataVencimento=" + dataVencimento +
+                ", pago=" + pago +
+                '}';
+    }
+
     public void setPago(Boolean pago) {
         this.pago = pago;
     }
