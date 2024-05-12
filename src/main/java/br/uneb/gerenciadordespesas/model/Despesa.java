@@ -1,5 +1,6 @@
 package br.uneb.gerenciadordespesas.model;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 public final class Despesa {
@@ -60,6 +61,14 @@ public final class Despesa {
         return pago;
     }
 
+    public void setPago(Boolean pago) {
+        this.pago = pago;
+    }
+
+    public String getPrecoFormatado() {
+        return NumberFormat.getCurrencyInstance().format(getPreco());
+    }
+
     @Override
     public String toString() {
         return "Despesa{" +
@@ -69,9 +78,5 @@ public final class Despesa {
                 ", dataVencimento=" + dataVencimento +
                 ", pago=" + pago +
                 '}';
-    }
-
-    public void setPago(Boolean pago) {
-        this.pago = pago;
     }
 }

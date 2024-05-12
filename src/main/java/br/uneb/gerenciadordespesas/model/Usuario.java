@@ -1,5 +1,6 @@
 package br.uneb.gerenciadordespesas.model;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public final class Usuario {
         this.despesas = despesas;
     }
 
-    public Double getValorTotal() {
+    public String getValorTotal() {
         Double soma = 0d;
 
         for (Despesa despesa : despesas) {
@@ -61,10 +62,10 @@ public final class Usuario {
 
         valorTotal = soma;
 
-        return valorTotal;
+        return NumberFormat.getCurrencyInstance().format(valorTotal);
     }
 
-    public Double getValorJaPago() {
+    public String getValorJaPago() {
         Double soma = 0d;
 
         for (Despesa despesa : despesas) {
@@ -75,10 +76,10 @@ public final class Usuario {
 
         valorJaPago = soma;
 
-        return valorJaPago;
+        return NumberFormat.getCurrencyInstance().format(valorJaPago);
     }
 
-    public Double getValorPendente() {
+    public String getValorPendente() {
         Double soma = 0d;
 
         for (Despesa despesa : despesas) {
@@ -89,7 +90,7 @@ public final class Usuario {
 
         valorPendente = soma;
 
-        return valorPendente;
+        return NumberFormat.getCurrencyInstance().format(valorPendente);
     }
 
     @Override
