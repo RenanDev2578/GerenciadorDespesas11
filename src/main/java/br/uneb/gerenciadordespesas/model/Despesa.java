@@ -10,6 +10,7 @@ public final class Despesa {
     private Categoria categoria;
     private LocalDate dataVencimento;
     private Boolean pago;
+    private Integer idUsuario;
 
     public Despesa(String nome, Double preco, LocalDate dataVencimento) {
         this.nome = nome;
@@ -23,6 +24,14 @@ public final class Despesa {
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.pago = pago;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
