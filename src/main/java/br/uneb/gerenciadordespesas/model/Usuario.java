@@ -6,28 +6,19 @@ import java.util.List;
 
 public final class Usuario {
 
-    private Integer id;
     private String nome;
     private String email;
     private String senha;
     private List<Despesa> despesas;
-    private Double valorTotal;
-    private Double valorJaPago;
-    private Double valorPendente;
+    private double valorTotal;
+    private double valorJaPago;
+    private double valorPendente;
 
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         despesas = new ArrayList<>();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -63,7 +54,7 @@ public final class Usuario {
     }
 
     public String getValorTotal() {
-        Double soma = 0d;
+        double soma = 0d;
 
         for (Despesa despesa : despesas) {
             soma += despesa.getPreco();
@@ -75,7 +66,7 @@ public final class Usuario {
     }
 
     public String getValorJaPago() {
-        Double soma = 0d;
+        double soma = 0d;
 
         for (Despesa despesa : despesas) {
             if (despesa.getPago()) {
@@ -89,7 +80,7 @@ public final class Usuario {
     }
 
     public String getValorPendente() {
-        Double soma = 0d;
+        double soma = 0d;
 
         for (Despesa despesa : despesas) {
             if (!despesa.getPago()) {

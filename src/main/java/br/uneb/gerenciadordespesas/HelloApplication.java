@@ -6,12 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TelaEntradaController extends Application {
+public class HelloApplication extends Application {
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/TelaEntrada.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaEntrada.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

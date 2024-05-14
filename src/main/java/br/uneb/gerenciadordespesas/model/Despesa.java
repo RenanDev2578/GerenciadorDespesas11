@@ -6,19 +6,19 @@ import java.time.LocalDate;
 public final class Despesa {
 
     private String nome;
-    private Double preco;
+    private double preco;
     private Categoria categoria;
     private LocalDate dataVencimento;
-    private Boolean pago;
-    private Integer idUsuario;
+    private boolean pago;
+    private int emailUsuario;
 
-    public Despesa(String nome, Double preco, LocalDate dataVencimento) {
+    public Despesa(String nome, double preco, LocalDate dataVencimento) {
         this.nome = nome;
         this.preco = preco;
         this.dataVencimento = dataVencimento;
     }
 
-    public Despesa(String nome, Double preco, Categoria categoria, LocalDate dataVencimento, Boolean pago) {
+    public Despesa(String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago) {
         this.nome = nome;
         this.preco = preco;
         this.categoria = categoria;
@@ -26,12 +26,12 @@ public final class Despesa {
         this.pago = pago;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public int getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setEmailUsuario(int emailUsuario) {
+        this.emailUsuario = emailUsuario;
     }
 
     public String getNome() {
@@ -42,11 +42,11 @@ public final class Despesa {
         this.nome = nome;
     }
 
-    public Double getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -66,11 +66,11 @@ public final class Despesa {
         this.dataVencimento = dataVencimento;
     }
 
-    public Boolean getPago() {
+    public boolean getPago() {
         return pago;
     }
 
-    public void setPago(Boolean pago) {
+    public void setPago(boolean pago) {
         this.pago = pago;
     }
 
