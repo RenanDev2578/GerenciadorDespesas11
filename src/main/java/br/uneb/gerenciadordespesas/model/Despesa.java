@@ -5,32 +5,39 @@ import java.time.LocalDate;
 
 public final class Despesa {
 
+    private int id;
     private String nome;
     private double preco;
     private Categoria categoria;
     private LocalDate dataVencimento;
     private boolean pago;
-    private int emailUsuario;
+    private String emailUsuario;
 
-    public Despesa(String nome, double preco, LocalDate dataVencimento) {
-        this.nome = nome;
-        this.preco = preco;
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Despesa(String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago) {
+    public Despesa(int id, String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, String emailUsuario) {
+        this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.pago = pago;
+        this.emailUsuario = emailUsuario;
     }
 
-    public int getEmailUsuario() {
+    public Despesa() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmailUsuario() {
         return emailUsuario;
     }
 
-    public void setEmailUsuario(int emailUsuario) {
+    public void setEmailUsuario(String emailUsuario) {
         this.emailUsuario = emailUsuario;
     }
 

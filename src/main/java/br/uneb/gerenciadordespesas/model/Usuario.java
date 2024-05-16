@@ -1,6 +1,6 @@
 package br.uneb.gerenciadordespesas.model;
 
-import java.text.NumberFormat;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public final class Usuario {
     private String senha;
     private List<Despesa> despesas;
     private double valorTotal;
-    private double valorJaPago;
+    private double valorPago;
     private double valorPendente;
 
     public Usuario(String nome, String email, String senha) {
@@ -19,6 +19,16 @@ public final class Usuario {
         this.email = email;
         this.senha = senha;
         despesas = new ArrayList<>();
+        valorTotal = 0d;
+        valorPendente = 0d;
+        valorPago = 0d;
+    }
+
+    public Usuario() {
+        despesas = new ArrayList<>();
+        valorTotal = 0d;
+        valorPendente = 0d;
+        valorPago = 0d;
     }
 
     public String getNome() {
@@ -53,44 +63,52 @@ public final class Usuario {
         this.despesas = despesas;
     }
 
-    public String getValorTotal() {
-        double soma = 0d;
-
-        for (Despesa despesa : despesas) {
-            soma += despesa.getPreco();
-        }
-
-        valorTotal = soma;
-
-        return NumberFormat.getCurrencyInstance().format(valorTotal);
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public String getValorJaPago() {
-        double soma = 0d;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
 
-        for (Despesa despesa : despesas) {
+    public double getValorPago() {
+        return valorPago;
+    }
+
+    public void setValorPago(double valorPago) {
+        this.valorPago = valorPago;
+    }
+
+    public double getValorPendente() {
+        return valorPendente;
+    }
+
+    public void setValorPendente(double valorPendente) {
+        this.valorPendente = valorPendente;
+    }
+
+    public void atualizarValores() {
+        double somaTotal = 0d, somaPaga = 0d, somaPendente = 0d;
+
+        for (Despesa despesa : getDespesas()) {
+            somaTotal += despesa.getPreco();
+
             if (despesa.getPago()) {
-                soma += despesa.getPreco();
+                somaPaga += despesa.getPreco();
+            } else {
+                somaPendente += despesa.getPreco();
             }
         }
 
-        valorJaPago = soma;
+        this.valorPendente = somaPendente;
+        this.valorPago = somaPaga;
+        this.valorTotal = somaTotal;
 
-        return NumberFormat.getCurrencyInstance().format(valorJaPago);
-    }
-
-    public String getValorPendente() {
-        double soma = 0d;
-
-        for (Despesa despesa : despesas) {
-            if (!despesa.getPago()) {
-                soma += despesa.getPreco();
-            }
+        try {
+            new UsuarioDAO().updateValores(this);
+        } catch (SQLException e) {
+            System.out.println("Atualização de valores falhou");
         }
-
-        valorPendente = soma;
-
-        return NumberFormat.getCurrencyInstance().format(valorPendente);
     }
 
     @Override
@@ -101,7 +119,7 @@ public final class Usuario {
                 ", senha='" + senha + '\'' +
                 ", despesas=" + despesas +
                 ", valorTotal=" + valorTotal +
-                ", valorJaPago=" + valorJaPago +
+                ", valorPago=" + valorPago +
                 ", valorPendente=" + valorPendente +
                 '}';
     }
