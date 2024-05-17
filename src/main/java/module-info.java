@@ -4,7 +4,7 @@ module br.uneb.gerenciadordespesas {
     requires java.sql;
 
 
-    opens br.uneb.gerenciadordespesas to javafx.fxml;
+    opens br.uneb.gerenciadordespesas.controller to javafx.fxml;
     exports br.uneb.gerenciadordespesas;
     exports br.uneb.gerenciadordespesas.controller;
     opens br.uneb.gerenciadordespesas.view to javafx.fxml;
