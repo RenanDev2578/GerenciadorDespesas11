@@ -19,11 +19,11 @@ public class Tabelas {
     private static void execute(String sql) throws SQLException {
         Connection conexao = ConexaoBanco.conectar();//faz a conexão com o banco
 
-        //prepara o sql e executa o comando dentro do banco
-        PreparedStatement preparedStatement = conexao.prepareStatement(sql);
-        preparedStatement.execute();
-        conexao.commit();
+        PreparedStatement preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
+        preparedStatement.execute();//executa o comando SQL
+
+        conexao.commit();//confirma a alteração dentro do banco
         conexao.close();//fecha a conexão com o banco
     }
 }

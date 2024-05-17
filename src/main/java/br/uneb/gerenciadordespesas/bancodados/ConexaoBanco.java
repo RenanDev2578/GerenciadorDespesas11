@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 public class ConexaoBanco {
 
+    /* Classe para obter conexão com o banco */
+
     public static Connection conectar() throws SQLException {
         final String nomeBanco = "jdbc:hsqldb:file:BancoDeDados/gerenciadordespesas;hsqldb.lock_file=false";
         final String usuario = "SA";
