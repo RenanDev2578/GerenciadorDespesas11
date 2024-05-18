@@ -3,6 +3,7 @@ package br.uneb.gerenciadordespesas.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaCadastroController {
@@ -14,13 +15,13 @@ public class TelaCadastroController {
     private Button botaoCadastro;
 
     @FXML
-    private TextField fieldConfirmaSenha;
+    private PasswordField fieldConfirmaSenha;
 
     @FXML
     private TextField fieldNome;
 
     @FXML
-    private TextField fieldSenha;
+    private PasswordField fieldSenha;
 
     @FXML
     void botaoCadastroAcao(ActionEvent event) {
