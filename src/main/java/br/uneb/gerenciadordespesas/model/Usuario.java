@@ -87,13 +87,13 @@ public final class Usuario {
         this.valorPendente = valorPendente;
     }
 
-    public void atualizarValores() {
+    public void atualizarValores() throws SQLException, ClassNotFoundException {
         double somaTotal = 0d, somaPaga = 0d, somaPendente = 0d;
 
         for (Despesa despesa : getDespesas()) {
             somaTotal += despesa.getPreco();
 
-            if (despesa.getPago()) {
+            if (despesa.isPago()) {
                 somaPaga += despesa.getPreco();
             } else {
                 somaPendente += despesa.getPreco();
@@ -104,11 +104,7 @@ public final class Usuario {
         this.valorPago = somaPaga;
         this.valorTotal = somaTotal;
 
-        try {
-            new UsuarioDAO().updateValores(this);
-        } catch (SQLException e) {
-            System.out.println("Atualização de valores falhou");
-        }
+        new UsuarioDAO().updateValores(this);
     }
 
     @Override

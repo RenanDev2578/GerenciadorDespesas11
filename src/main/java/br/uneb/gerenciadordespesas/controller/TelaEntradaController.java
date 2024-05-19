@@ -22,7 +22,7 @@ public class TelaEntradaController {
 
     @FXML
     void BotaoEntrarAcao(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaEntrar.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaLogin.fxml"));
         this.borderPane.setCenter(root);
     }
 

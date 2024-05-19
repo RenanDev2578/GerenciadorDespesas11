@@ -2,6 +2,7 @@ module br.uneb.gerenciadordespesas {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.hsqldb;
 
 
     opens br.uneb.gerenciadordespesas.controller to javafx.fxml;

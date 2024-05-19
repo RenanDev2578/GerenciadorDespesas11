@@ -16,41 +16,31 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class TelaCadastroController {
+public class TelaLoginController {
+
+    @FXML
+    private Button botaoEntrar;
 
     @FXML
     private TextField fieldEmail;
 
     @FXML
-    private Button botaoCadastro;
-
-    @FXML
-    private PasswordField fieldConfirmaSenha;
-
-    @FXML
-    private TextField fieldNome;
-
-    @FXML
     private PasswordField fieldSenha;
 
     @FXML
-    void botaoCadastroAcao(ActionEvent event) throws IOException {
+    void botaoEntrarAcao(ActionEvent event) {
 
         String email = fieldEmail.getText();
-        String nome = fieldNome.getText();
         String senha = fieldSenha.getText();
-        String confirmacaoSenha = fieldConfirmaSenha.getText();
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 
         Usuario usuario;
 
         try {
-            if (!usuarioDAO.verificarExistenciaUsuario(email)) {
-                if (senha.equals(confirmacaoSenha)) {
-                    usuario = new Usuario(nome, email, senha);
-
-                    usuarioDAO.create(usuario);
+            if (usuarioDAO.verificarExistenciaUsuario(email)) {
+                if (usuarioDAO.vericarSenha(email, senha)) {
+                    usuario = usuarioDAO.read(email, senha);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
                     Parent root = loader.load();
@@ -63,10 +53,10 @@ public class TelaCadastroController {
 
                     stage.show();
                 } else {
-                    System.out.println("Senhas diferentes");
+                    System.out.println("Senha incorreta");
                 }
             } else {
-                System.out.println("Usuário já existe. Logue em sua conta");
+                System.out.println("Usuário não cadastrado. Por favor cadastre-se primeiro");
             }
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Erro no acesso ao banco de dados. Tente novamente!");

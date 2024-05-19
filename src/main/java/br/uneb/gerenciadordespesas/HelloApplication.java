@@ -1,18 +1,26 @@
 package br.uneb.gerenciadordespesas;
 
 import br.uneb.gerenciadordespesas.bancodados.Tabelas;
+import br.uneb.gerenciadordespesas.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class HelloApplication extends Application {
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        Tabelas.criar();
+        try {
+            Tabelas.criar();
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("conexão falhou");
+        }
+
         Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaEntrada.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -23,6 +23,15 @@ public final class Despesa {
         this.emailUsuario = emailUsuario;
     }
 
+    public Despesa(String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, String emailUsuario) {
+        this.nome = nome;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.dataVencimento = dataVencimento;
+        this.pago = pago;
+        this.emailUsuario = emailUsuario;
+    }
+
     public Despesa() {}
 
     public int getId() {
@@ -73,7 +82,7 @@ public final class Despesa {
         this.dataVencimento = dataVencimento;
     }
 
-    public boolean getPago() {
+    public boolean isPago() {
         return pago;
     }
 
@@ -88,11 +97,13 @@ public final class Despesa {
     @Override
     public String toString() {
         return "Despesa{" +
-                "nome='" + nome + '\'' +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", preco=" + preco +
                 ", categoria=" + categoria +
                 ", dataVencimento=" + dataVencimento +
                 ", pago=" + pago +
+                ", emailUsuario='" + emailUsuario + '\'' +
                 '}';
     }
 }

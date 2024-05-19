@@ -29,7 +29,7 @@
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
                <children>
                   <Label text="E-mail" />
-                  <TextField fx:id="FieldEmail" />
+                  <TextField fx:id="fieldEmail" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
