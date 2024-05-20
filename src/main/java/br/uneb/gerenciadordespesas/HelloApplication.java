@@ -1,7 +1,6 @@
 package br.uneb.gerenciadordespesas;
 
 import br.uneb.gerenciadordespesas.bancodados.Tabelas;
-import br.uneb.gerenciadordespesas.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

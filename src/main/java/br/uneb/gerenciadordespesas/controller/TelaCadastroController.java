@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -73,6 +74,11 @@ public class TelaCadastroController {
         } catch (IOException e) {
             System.out.println("Arquivo fxml não encontrado");
         }
+    }
+
+    @FXML
+    void verificarTexto(KeyEvent event) {
+        botaoCadastro.setDisable(fieldEmail.getText().isEmpty() || fieldNome.getText().isEmpty() || fieldSenha.getText().isEmpty() || fieldConfirmaSenha.getText().isEmpty());
     }
 
 }

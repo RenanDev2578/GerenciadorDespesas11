@@ -23,28 +23,28 @@
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
                <children>
                   <Label text="Nome" />
-                  <TextField fx:id="fieldNome" />
+                  <TextField fx:id="fieldNome" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
                <children>
                   <Label text="E-mail" />
-                  <TextField fx:id="fieldEmail" />
+                  <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
                <children>
                   <Label text="Senha" />
-                  <PasswordField fx:id="fieldSenha" />
+                  <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
                <children>
                   <Label text="Confirme a senha" />
-                  <PasswordField fx:id="fieldConfirmaSenha" />
+                  <PasswordField fx:id="fieldConfirmaSenha" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
-            <Button fx:id="botaoCadastro" mnemonicParsing="false" onAction="#botaoCadastroAcao" text="CADASTRAR-SE" />
+            <Button fx:id="botaoCadastro" disable="true" mnemonicParsing="false" onAction="#botaoCadastroAcao" text="CADASTRAR-SE" />
          </children>
       </VBox>
    </children>

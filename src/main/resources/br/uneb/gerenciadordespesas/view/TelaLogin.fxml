@@ -23,16 +23,16 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="E-mail" />
-                  <TextField fx:id="fieldEmail" />
+                  <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Senha" />
-                  <PasswordField fx:id="fieldSenha" />
+                  <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" />
                </children>
             </HBox>
-            <Button fx:id="botaoEntrar" mnemonicParsing="false" onAction="#botaoEntrarAcao" text="Entrar" />
+            <Button fx:id="botaoEntrar" disable="true" mnemonicParsing="false" onAction="#botaoEntrarAcao" text="Entrar" />
          </children>
       </VBox>
    </children>
