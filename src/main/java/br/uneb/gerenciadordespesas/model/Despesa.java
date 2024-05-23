@@ -99,8 +99,8 @@ public final class Despesa {
         return "Despesa{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", categoria=" + categoria +
+                ", preco=" + getPrecoFormatado() +
+                ", categoria=" + categoria.getNome() +
                 ", dataVencimento=" + dataVencimento +
                 ", pago=" + pago +
                 ", emailUsuario='" + emailUsuario + '\'' +

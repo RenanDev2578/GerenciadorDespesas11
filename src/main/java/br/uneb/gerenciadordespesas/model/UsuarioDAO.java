@@ -196,4 +196,8 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
         return igual;
     }
+
+    public boolean verificarSenhasIguaisCadastro(String senha, String confirmacaoSenha) {
+        return senha.equals(confirmacaoSenha);
+    }
 }

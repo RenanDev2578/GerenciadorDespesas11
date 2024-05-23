@@ -48,7 +48,7 @@ public class TelaCadastroController {
 
         try {
             if (!usuarioDAO.verificarExistenciaUsuario(email)) {
-                if (senha.equals(confirmacaoSenha)) {
+                if (usuarioDAO.verificarSenhasIguaisCadastro(senha, confirmacaoSenha)) {
                     usuario = new Usuario(nome, email, senha);
 
                     usuarioDAO.create(usuario);
