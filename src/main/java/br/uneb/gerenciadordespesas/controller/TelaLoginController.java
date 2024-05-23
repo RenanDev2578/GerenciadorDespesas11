@@ -1,7 +1,6 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
-import br.uneb.gerenciadordespesas.model.UsuarioDAO;
+import br.uneb.gerenciadordespesas.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class TelaLoginController {
 
@@ -70,5 +70,4 @@ public class TelaLoginController {
     void verificarTexto(KeyEvent event) {
         botaoEntrar.setDisable(fieldEmail.getText().isEmpty() || fieldSenha.getText().isEmpty());
     }
-
 }

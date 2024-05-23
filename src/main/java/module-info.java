@@ -3,6 +3,9 @@ module br.uneb.gerenciadordespesas {
     requires javafx.fxml;
     requires java.sql;
     requires org.hsqldb;
+    requires org.jfree.jfreechart;
+    requires java.desktop;
+    requires javafx.swing;
 
 
     opens br.uneb.gerenciadordespesas.controller to javafx.fxml;
