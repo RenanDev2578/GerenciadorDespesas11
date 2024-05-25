@@ -36,12 +36,10 @@ public class TelaLoginController {
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-        Usuario usuario;
-
         try {
             if (usuarioDAO.verificarExistenciaUsuario(email)) {
                 if (usuarioDAO.vericarSenha(email, senha)) {
-                    usuario = usuarioDAO.read(email, senha);
+                    Usuario usuario = usuarioDAO.read(email, senha);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
                     Parent root = loader.load();
