@@ -19,7 +19,7 @@ public class Grafico {
 
     public static Node gerarGraficoPizza(Usuario usuario) {
 
-        DefaultPieDataset pieDataset = getDefaultPieDataset(usuario);
+        DefaultPieDataset pieDataset = preencherDadosGraficoPizza(usuario);
 
         JFreeChart pieChart = ChartFactory.createPieChart("GRÁFICO DE PIZZA POR QUANTIDADE", pieDataset, true, true, false);
 
@@ -40,7 +40,7 @@ public class Grafico {
 
     public static Node gerarGraficoBarra(Usuario usuario) {
 
-        DefaultCategoryDataset dataset = getDefaultCategoryDataset(usuario);
+        DefaultCategoryDataset dataset = preencherDadosGraficoBarras(usuario);
 
         JFreeChart barChart = ChartFactory.createBarChart("GRÁFICO DE BARRA POR VALOR", "Categorias","Valor", dataset, PlotOrientation.VERTICAL,true,true,false);
 
@@ -56,7 +56,7 @@ public class Grafico {
         return swingNode;
     }
 
-    private static DefaultCategoryDataset getDefaultCategoryDataset(Usuario usuario) {
+    private static DefaultCategoryDataset preencherDadosGraficoBarras(Usuario usuario) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Categoria categoria : Categoria.values()) {
@@ -77,7 +77,7 @@ public class Grafico {
         return dataset;
     }
 
-    private static DefaultPieDataset getDefaultPieDataset(Usuario usuario) {
+    private static DefaultPieDataset preencherDadosGraficoPizza(Usuario usuario) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
         for (Categoria categoria : Categoria.values()) {

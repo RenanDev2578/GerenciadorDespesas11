@@ -4,15 +4,10 @@ import br.uneb.gerenciadordespesas.model.Usuario;
 import br.uneb.gerenciadordespesas.model.UsuarioDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,16 +46,7 @@ public class TelaCadastroController {
 
                     usuarioDAO.create(usuario);
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-
-                    TelaPrincipalController telaPrincipal = loader.getController();
-                    telaPrincipal.setUsuario(usuario);
-
-                    stage.show();
+                    TrocarTela.entradaParaPrincipal(usuario, event);
                 } else {
                     System.out.println("Senhas diferentes");
                 }

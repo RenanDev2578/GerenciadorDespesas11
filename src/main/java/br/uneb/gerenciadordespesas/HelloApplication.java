@@ -1,10 +1,8 @@
 package br.uneb.gerenciadordespesas;
 
 import br.uneb.gerenciadordespesas.bancodados.Tabelas;
+import br.uneb.gerenciadordespesas.controller.TrocarTela;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -16,13 +14,10 @@ public class HelloApplication extends Application {
         try {
             Tabelas.criar();
         } catch (SQLException | ClassNotFoundException e) {
-
+            System.out.println("Não foi possível se conectar ao banco");
         }
 
-        Parent root = FXMLLoader.load(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaEntrada.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        TrocarTela.entrada(stage);
     }
 
     public static void main(String[] args) {

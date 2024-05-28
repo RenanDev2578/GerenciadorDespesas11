@@ -3,6 +3,7 @@ package br.uneb.gerenciadordespesas.controller;
 import br.uneb.gerenciadordespesas.model.Usuario;
 import br.uneb.gerenciadordespesas.util.Grafico;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class TelaPrincipalController {
@@ -12,10 +13,13 @@ public class TelaPrincipalController {
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private Label label;
+
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        gridPane.getChildren().add(Grafico.gerarGraficoPizza(usuario));
+        this.gridPane.getChildren().add(Grafico.gerarGraficoPizza(usuario));
     }
 
 }
