@@ -14,30 +14,25 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
     @Override
     public void create(Despesa despesa) throws SQLException, ClassNotFoundException {
-        sql = "INSERT INTO DESPESA(NOME, PRECO, DATA_VENCIMENTO, CATEGORIA, PAGO, EMAIL_USUARIO, RECORRENTE) VALUES (?, ?, ?, ?, ?, ?, ?);";//string com o código SQL
+        sql = "INSERT INTO DESPESA(NOME, PRECO, DATA_VENCIMENTO, CATEGORIA, PAGO, EMAIL_USUARIO) VALUES (?, ?, ?, ?, ?, ?);";//string com o código SQL
 
-        for (int i = 0; despesa.isRecorrente() ? i < 12 : i < 1; i++) {
-            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-            //define os valores dos ? na string sql
-            preparedStatement.setString(1, despesa.getNome());
-            preparedStatement.setDouble(2, despesa.getPreco());
-            preparedStatement.setDate(3, Date.valueOf(despesa.getDataVencimento()));
-            preparedStatement.setString(4, despesa.getCategoria().toString());
-            preparedStatement.setBoolean(5, despesa.isPago());
-            preparedStatement.setString(6, despesa.getEmailUsuario());
-            preparedStatement.setBoolean(7, despesa.isRecorrente());
+        //define os valores dos ? na string sql
+        preparedStatement.setString(1, despesa.getNome());
+        preparedStatement.setDouble(2, despesa.getPreco());
+        preparedStatement.setDate(3, Date.valueOf(despesa.getDataVencimento()));
+        preparedStatement.setString(4, despesa.getCategoria().toString());
+        preparedStatement.setBoolean(5, despesa.isPago());
+        preparedStatement.setString(6, despesa.getEmailUsuario());
 
-            preparedStatement.executeUpdate();//executa o comando SQL
+        preparedStatement.executeUpdate();//executa o comando SQL
 
-            conexao.commit();//confirma a alteração dentro do banco
-            preparedStatement.close();
-            conexao.close();//fecha a conexão com o banco
-
-            despesa.setDataVencimento(despesa.getDataVencimento().plusMonths(1));
-        }
+        conexao.commit();//confirma a alteração dentro do banco
+        preparedStatement.close();
+        conexao.close();//fecha a conexão com o banco
     }
 
     @Override
@@ -65,7 +60,6 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
             despesa.setNome(resultSet.getString("NOME"));
             despesa.setPago(resultSet.getBoolean("PAGO"));
             despesa.setPreco(resultSet.getDouble("PRECO"));
-            despesa.setRecorrente(resultSet.getBoolean("RECORRENTE"));
         }
 
         preparedStatement.close();
@@ -93,7 +87,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
                     resultSet.getDouble("PRECO"),
                     Categoria.valueOf(resultSet.getString("CATEGORIA")),
                     resultSet.getDate("DATA_VENCIMENTO").toLocalDate(),
-                    resultSet.getBoolean("PAGO"), resultSet.getBoolean("RECORRENTE"),
+                    resultSet.getBoolean("PAGO"),
                     emailUsuario);
 
             despesas.add(despesa);
@@ -109,25 +103,13 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
     public void delete(Despesa despesa) throws SQLException, ClassNotFoundException {
         conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        if (despesa.isRecorrente()) {
+        sql = "DELETE FROM DESPESA WHERE NOME = ? AND EMAIL_USUARIO = ?;";//string com o código SQL
 
-            sql = "DELETE FROM DESPESA WHERE NOME = ? AND EMAIL_USUARIO = ?;";//string com o código SQL
+        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
-
-            //define os valores dos ? na string sql
-            preparedStatement.setString(1, despesa.getNome());
-            preparedStatement.setString(2, despesa.getEmailUsuario());
-        } else {
-
-            sql = "DELETE FROM DESPESA WHERE ID = ? AND EMAIL_USUARIO = ?;";//string com o código SQL
-
-            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
-
-            //define os valores dos ? na string sql
-            preparedStatement.setInt(1, despesa.getId());
-            preparedStatement.setString(2, despesa.getEmailUsuario());
-        }
+        //define os valores dos ? na string sql
+        preparedStatement.setString(1, despesa.getNome());
+        preparedStatement.setString(2, despesa.getEmailUsuario());
 
         preparedStatement.executeUpdate();//executa o comando SQL
 

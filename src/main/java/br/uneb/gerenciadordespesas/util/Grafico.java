@@ -14,12 +14,14 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.Month;
+import java.time.Year;
 
 public class Grafico {
 
-    public static Node gerarGraficoPizza(Usuario usuario) {
+    public static Node gerarGraficoPizza(Usuario usuario, Month mes, Year ano) {
 
-        DefaultPieDataset pieDataset = preencherDadosGraficoPizza(usuario);
+        DefaultPieDataset pieDataset = preencherDadosGraficoPizza(usuario, mes, ano);
 
         JFreeChart pieChart = ChartFactory.createPieChart("GRÁFICO DE PIZZA POR QUANTIDADE", pieDataset, true, true, false);
 
@@ -38,9 +40,9 @@ public class Grafico {
         return node;
     }
 
-    public static Node gerarGraficoBarra(Usuario usuario) {
+    public static Node gerarGraficoBarra(Usuario usuario, Month mes, Year ano) {
 
-        DefaultCategoryDataset dataset = preencherDadosGraficoBarras(usuario);
+        DefaultCategoryDataset dataset = preencherDadosGraficoBarras(usuario, mes, ano);
 
         JFreeChart barChart = ChartFactory.createBarChart("GRÁFICO DE BARRA POR VALOR", "Categorias","Valor", dataset, PlotOrientation.VERTICAL,true,true,false);
 
@@ -56,7 +58,7 @@ public class Grafico {
         return swingNode;
     }
 
-    private static DefaultCategoryDataset preencherDadosGraficoBarras(Usuario usuario) {
+    private static DefaultCategoryDataset preencherDadosGraficoBarras(Usuario usuario, Month mes, Year ano) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Categoria categoria : Categoria.values()) {
@@ -65,7 +67,7 @@ public class Grafico {
 
             for (Despesa despesa : usuario.getDespesas()) {
 
-                if (despesa.getCategoria() == categoria) {
+                if (despesa.getCategoria() == categoria && despesa.getDataVencimento().getMonth() == mes && despesa.getDataVencimento().getYear() == ano.getValue()) {
                     somaCategoria += despesa.getPreco();
                 }
             }
@@ -77,7 +79,7 @@ public class Grafico {
         return dataset;
     }
 
-    private static DefaultPieDataset preencherDadosGraficoPizza(Usuario usuario) {
+    private static DefaultPieDataset preencherDadosGraficoPizza(Usuario usuario, Month mes, Year ano) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
         for (Categoria categoria : Categoria.values()) {
@@ -85,7 +87,7 @@ public class Grafico {
             int somaCategoria = 0;
 
             for (Despesa despesa : usuario.getDespesas()) {
-                if (despesa.getCategoria() == categoria) {
+                if (despesa.getCategoria() == categoria && despesa.getDataVencimento().getMonth() == mes && despesa.getDataVencimento().getYear() == ano.getValue()) {
                     somaCategoria++;
                 }
             }

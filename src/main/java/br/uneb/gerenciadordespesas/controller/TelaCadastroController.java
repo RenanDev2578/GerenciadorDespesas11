@@ -37,47 +37,6 @@ public class TelaCadastroController {
     @FXML
     void botaoCadastroAcao(ActionEvent event) throws IOException {
 
-        String email = fieldEmail.getText();
-        String nome = fieldNome.getText();
-        String senha = fieldSenha.getText();
-        String confirmacaoSenha = fieldConfirmaSenha.getText();
-
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-        try {
-            if (!usuarioDAO.verificarExistenciaUsuario(email)) {
-                if (usuarioDAO.verificarSenhasIguaisCadastro(senha, confirmacaoSenha)) {
-                    Usuario usuario = new Usuario(nome, email, senha);
-
-                    usuarioDAO.create(usuario);
-
-                    //    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
-                    //                    Parent root = loader.load();
-                    //                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    //                    Scene scene = new Scene(root);
-                    //                    stage.setScene(scene);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-
-
-                    TelaAdDespController telaAdDespController = loader.getController();
-                    telaAdDespController.setUsuario();
-
-                    stage.show();
-                } else {
-                    System.out.println("Senhas diferentes");
-                }
-            } else {
-                System.out.println("Usuário já existe. Logue em sua conta");
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Erro no acesso ao banco de dados. Tente novamente!");
-        } catch (IOException e) {
-            System.out.println("Arquivo fxml não encontrado");
-        }
     }
 
     @FXML
@@ -85,4 +44,6 @@ public class TelaCadastroController {
         botaoCadastro.setDisable(fieldEmail.getText().isEmpty() || fieldNome.getText().isEmpty() || fieldSenha.getText().isEmpty() || fieldConfirmaSenha.getText().isEmpty());
     }
 
+    public void setUsuario() {
+    }
 }
