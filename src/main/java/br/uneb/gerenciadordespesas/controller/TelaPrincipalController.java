@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import java.time.Month;
+import java.time.Year;
+
 public class TelaPrincipalController {
 
     private Usuario usuario;
@@ -19,7 +22,7 @@ public class TelaPrincipalController {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        this.gridPane.getChildren().add(Grafico.gerarGraficoPizza(usuario));
+        this.gridPane.getChildren().add(Grafico.gerarGraficoPizza(usuario, Month.MAY, Year.now()));
     }
 
 }

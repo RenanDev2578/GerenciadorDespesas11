@@ -87,7 +87,12 @@ public final class Usuario {
         this.valorPendente = valorPendente;
     }
 
-    public void atualizarValores() throws SQLException, ClassNotFoundException {
+    public void adicionarDespesa(Despesa despesa) throws SQLException, ClassNotFoundException {
+        this.despesas.add(despesa);
+        atualizarValores();
+    }
+
+    private void atualizarValores() throws SQLException, ClassNotFoundException {
         double somaTotal = 0d, somaPaga = 0d, somaPendente = 0d;
 
         for (Despesa despesa : getDespesas()) {

@@ -11,6 +11,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         try {
             Tabelas.criar();
         } catch (SQLException | ClassNotFoundException e) {
