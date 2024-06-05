@@ -11,27 +11,24 @@ public final class Despesa {
     private Categoria categoria;
     private LocalDate dataVencimento;
     private boolean pago;
-    private boolean recorrente;
     private String emailUsuario;
 
-    public Despesa(int id, String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, boolean recorrente, String emailUsuario) {
+    public Despesa(String nome, double preco, String emailUsuario) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.pago = pago;
-        this.recorrente = recorrente;
         this.emailUsuario = emailUsuario;
     }
 
-    public Despesa(String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, boolean recorrente, String emailUsuario) {
+    public Despesa(String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, String emailUsuario) {
         this.nome = nome;
         this.preco = preco;
         this.categoria = categoria;
         this.dataVencimento = dataVencimento;
         this.pago = pago;
-        this.recorrente = recorrente;
         this.emailUsuario = emailUsuario;
     }
 
@@ -93,14 +90,6 @@ public final class Despesa {
         this.pago = pago;
     }
 
-    public boolean isRecorrente() {
-        return recorrente;
-    }
-
-    public void setRecorrente(boolean recorrente) {
-        this.recorrente = recorrente;
-    }
-
     public String getPrecoFormatado() {
         return NumberFormat.getCurrencyInstance().format(getPreco());
     }
@@ -110,11 +99,10 @@ public final class Despesa {
         return "Despesa{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", categoria=" + categoria +
+                ", preco=" + getPrecoFormatado() +
+                ", categoria=" + categoria.getNome() +
                 ", dataVencimento=" + dataVencimento +
                 ", pago=" + pago +
-                ", recorrente=" + recorrente +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 '}';
     }

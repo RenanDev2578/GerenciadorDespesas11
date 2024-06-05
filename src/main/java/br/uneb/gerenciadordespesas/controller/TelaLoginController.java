@@ -3,13 +3,19 @@ package br.uneb.gerenciadordespesas.controller;
 import br.uneb.gerenciadordespesas.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class TelaLoginController {
 
@@ -35,7 +41,21 @@ public class TelaLoginController {
                 if (usuarioDAO.vericarSenha(email, senha)) {
                     Usuario usuario = usuarioDAO.read(email, senha);
 
-                    TrocarTela.entradaParaPrincipal(usuario, event);
+                  //FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
+                    //                    Parent root = loader.load();
+                    //                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    //                    Scene scene = new Scene(root);
+                    //                    stage.setScene(scene);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+
+                    TelaAdDespController telaAdDespController = loader.getController();
+                    telaAdDespController.setUsuario();
+
+                    stage.show();
                 } else {
                     System.out.println("Senha incorreta");
                 }
