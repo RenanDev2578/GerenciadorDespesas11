@@ -51,14 +51,20 @@ public class TelaCadastroController {
 
                     usuarioDAO.create(usuario);
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
+                    //    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
+                    //                    Parent root = loader.load();
+                    //                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    //                    Scene scene = new Scene(root);
+                    //                    stage.setScene(scene);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
 
-                    TelaPrincipalController telaPrincipal = loader.getController();
-                    telaPrincipal.setUsuario(usuario);
+
+                    TelaAdDespController telaAdDespController = loader.getController();
+                    telaAdDespController.setUsuario();
 
                     stage.show();
                 } else {

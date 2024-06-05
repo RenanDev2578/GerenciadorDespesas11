@@ -13,7 +13,7 @@ public final class Despesa {
     private boolean pago;
     private String emailUsuario;
 
-    public Despesa(int id, String nome, double preco, Categoria categoria, LocalDate dataVencimento, boolean pago, String emailUsuario) {
+    public Despesa(String nome, double preco, String emailUsuario) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;

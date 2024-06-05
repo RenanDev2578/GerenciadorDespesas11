@@ -83,11 +83,8 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
         //atribui os valores de cada coluna para cada objeto despesa e adiciona ela na lista
         while (resultSet.next()) {
-            Despesa despesa = new Despesa(resultSet.getInt("ID"), resultSet.getString("NOME"),
+            Despesa despesa = new Despesa(resultSet.getString("NOME"),
                     resultSet.getDouble("PRECO"),
-                    Categoria.valueOf(resultSet.getString("CATEGORIA")),
-                    resultSet.getDate("DATA_VENCIMENTO").toLocalDate(),
-                    resultSet.getBoolean("PAGO"),
                     emailUsuario);
 
             despesas.add(despesa);
