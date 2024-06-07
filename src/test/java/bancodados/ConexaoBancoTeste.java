@@ -11,6 +11,6 @@ public class ConexaoBancoTeste {
 
     @Test
     public void conectarTeste() throws SQLException, ClassNotFoundException {
-        assertNotNull(ConexaoBanco.conectar());
+        assertNotNull(ConexaoBanco.conectar(), "testa se a conexão não esta retornando null");
     }
 }

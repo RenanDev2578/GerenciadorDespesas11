@@ -9,10 +9,8 @@ public class CategoriaTeste {
 
     @Test
     public void getNomeTeste() {
-        for (Categoria categoria : Categoria.values()) {
-            String nomeCategoria = categoria.getNome();
+        String nomeCategoria = "Transporte";
 
-            assertEquals(nomeCategoria, categoria.getNome());
-        }
+        assertEquals(nomeCategoria, Categoria.TRANSPORTE.getNome());
     }
 }

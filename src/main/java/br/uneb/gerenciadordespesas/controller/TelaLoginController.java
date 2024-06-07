@@ -41,31 +41,11 @@ public class TelaLoginController {
                 if (usuarioDAO.vericarSenha(email, senha)) {
                     Usuario usuario = usuarioDAO.read(email, senha);
 
-                  //FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
-                    //                    Parent root = loader.load();
-                    //                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    //                    Scene scene = new Scene(root);
-                    //                    stage.setScene(scene);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-
-                    TelaAdDespController telaAdDespController = loader.getController();
-                    telaAdDespController.setUsuario();
-
-                    stage.show();
-                } else {
-                    System.out.println("Senha incorreta");
+                    TrocarTela.adicionarDespesa(usuario, event);
                 }
-            } else {
-                System.out.println("Usuário não cadastrado. Por favor cadastre-se primeiro");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Erro no acesso ao banco de dados. Tente novamente!");
-        } catch (IOException e) {
-            System.out.println("Arquivo fxml não encontrado");
+        } catch (SQLException | ClassNotFoundException | RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 

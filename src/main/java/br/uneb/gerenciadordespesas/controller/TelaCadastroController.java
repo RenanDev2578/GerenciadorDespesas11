@@ -4,18 +4,12 @@ import br.uneb.gerenciadordespesas.model.Usuario;
 import br.uneb.gerenciadordespesas.model.UsuarioDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class TelaCadastroController {
 
@@ -36,7 +30,6 @@ public class TelaCadastroController {
 
     @FXML
     void botaoCadastroAcao(ActionEvent event) throws IOException {
-
         String email = fieldEmail.getText();
         String nome = fieldNome.getText();
         String senha = fieldSenha.getText();
@@ -51,32 +44,11 @@ public class TelaCadastroController {
 
                     usuarioDAO.create(usuario);
 
-                    //    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipal.fxml"));
-                    //                    Parent root = loader.load();
-                    //                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    //                    Scene scene = new Scene(root);
-                    //                    stage.setScene(scene);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-
-
-                    TelaAdDespController telaAdDespController = loader.getController();
-                    telaAdDespController.setUsuario();
-
-                    stage.show();
-                } else {
-                    System.out.println("Senhas diferentes");
+                    TrocarTela.adicionarDespesa(usuario, event);
                 }
-            } else {
-                System.out.println("Usuário já existe. Logue em sua conta");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Erro no acesso ao banco de dados. Tente novamente!");
-        } catch (IOException e) {
-            System.out.println("Arquivo fxml não encontrado");
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -84,5 +56,4 @@ public class TelaCadastroController {
     void verificarTexto(KeyEvent event) {
         botaoCadastro.setDisable(fieldEmail.getText().isEmpty() || fieldNome.getText().isEmpty() || fieldSenha.getText().isEmpty() || fieldConfirmaSenha.getText().isEmpty());
     }
-
 }

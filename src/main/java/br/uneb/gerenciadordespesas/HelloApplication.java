@@ -2,6 +2,8 @@ package br.uneb.gerenciadordespesas;
 
 import br.uneb.gerenciadordespesas.bancodados.Tabelas;
 import br.uneb.gerenciadordespesas.controller.TrocarTela;
+import br.uneb.gerenciadordespesas.model.Usuario;
+import br.uneb.gerenciadordespesas.util.Email;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,7 +20,7 @@ public class HelloApplication extends Application {
             System.out.println("Não foi possível se conectar ao banco");
         }
 
-        TrocarTela.entrada(stage);
+        TrocarTela.inicial(stage);
     }
 
     public static void main(String[] args) {

@@ -15,58 +15,66 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
 
     @Override
-    public void create(Usuario usuario) throws SQLException, ClassNotFoundException {
-        sql = "INSERT INTO USUARIO (EMAIL, SENHA, NOME, VALOR_TOTAL, VALOR_PENDENTE, VALOR_PAGO) VALUES (?, ?, ?, ?, ?, ?);";//string com o código SQL
+    public void create(Usuario usuario) {
+        try {
+            sql = "INSERT INTO USUARIO (EMAIL, SENHA, NOME, VALOR_TOTAL, VALOR_PENDENTE, VALOR_PAGO) VALUES (?, ?, ?, ?, ?, ?);";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, usuario.getEmail());
-        preparedStatement.setString(2, usuario.getSenha());
-        preparedStatement.setString(3, usuario.getNome());
-        preparedStatement.setDouble(4, usuario.getValorTotal());
-        preparedStatement.setDouble(5, usuario.getValorPendente());
-        preparedStatement.setDouble(6, usuario.getValorPago());
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, usuario.getEmail());
+            preparedStatement.setString(2, usuario.getSenha());
+            preparedStatement.setString(3, usuario.getNome());
+            preparedStatement.setDouble(4, usuario.getValorTotal());
+            preparedStatement.setDouble(5, usuario.getValorPendente());
+            preparedStatement.setDouble(6, usuario.getValorPago());
 
-        preparedStatement.executeUpdate();//executa o comando SQL
+            preparedStatement.executeUpdate();//executa o comando SQL
 
-        conexao.commit();//confirma a alteração dentro do banco
-        preparedStatement.close();
-        conexao.close();//fecha a conexão com o banco
+            conexao.commit();//confirma a alteração dentro do banco
+            preparedStatement.close();
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na criação do usuário");
+        }
     }
 
     @Override
-    public Usuario read(String email, String x) throws SQLException, ClassNotFoundException {
-        sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";//string com o código SQL
+    public Usuario read(String email, String x) {
+        try {
+            sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, email);
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, email);
 
-        ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso só vai retornar 1 porque email é chave primária
+            ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso só vai retornar 1 porque email é chave primária
 
-        Usuario usuario = new Usuario();
+            Usuario usuario = new Usuario();
 
-        //atribui os valores de cada coluna ao objeto usuário
-        while (resultSet.next()) {
-            usuario.setEmail(resultSet.getString("EMAIL"));
-            usuario.setNome(resultSet.getString("NOME"));
-            usuario.setSenha(resultSet.getString("SENHA"));
-            usuario.setValorTotal(resultSet.getDouble("VALOR_TOTAL"));
-            usuario.setValorPendente(resultSet.getDouble("VALOR_PENDENTE"));
-            usuario.setValorPago(resultSet.getDouble("VALOR_PAGO"));
+            //atribui os valores de cada coluna ao objeto usuário
+            while (resultSet.next()) {
+                usuario.setEmail(resultSet.getString("EMAIL"));
+                usuario.setNome(resultSet.getString("NOME"));
+                usuario.setSenha(resultSet.getString("SENHA"));
+                usuario.setValorTotal(resultSet.getDouble("VALOR_TOTAL"));
+                usuario.setValorPendente(resultSet.getDouble("VALOR_PENDENTE"));
+                usuario.setValorPago(resultSet.getDouble("VALOR_PAGO"));
 
-            usuario.setDespesas(new DespesaDAO().readTodas(usuario.getEmail()));//carrega a lista de despesas do usuário
+                usuario.setDespesas(new DespesaDAO().readTodas(usuario.getEmail()));//carrega a lista de despesas do usuário
+            }
+
+            conexao.close();//fecha a conexão com o banco
+
+            return usuario;
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException("Erro na leitura de usuário");
         }
-
-        conexao.close();//fecha a conexão com o banco
-
-        return usuario;
     }
 
     @Override
@@ -149,28 +157,32 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
         conexao.close();//fecha a conexão com o banco
     }
 
-    public boolean verificarExistenciaUsuario(String email) throws SQLException, ClassNotFoundException {
-        sql = "SELECT COUNT(*) FROM USUARIO WHERE EMAIL = ?;";//string com o código SQL
+    public boolean verificarExistenciaUsuario(String email) {
+        try {
+            sql = "SELECT COUNT(*) FROM USUARIO WHERE EMAIL = ?;";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, email);
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, email);
 
-        ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso vai retornar 0 se o usuário não existe e 1 se já existe
+            ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso vai retornar 0 se o usuário não existe e 1 se já existe
 
-        boolean existe = false;
+            boolean existe = false;
 
-        if (resultSet.next()) {
-            int contador = resultSet.getInt(1);//pegar o quantidade retornada do SQL
-            existe = contador > 0;// existe passa a ser true se o contador for maior que 1
+            if (resultSet.next()) {
+                int contador = resultSet.getInt(1);//pegar o quantidade retornada do SQL
+                existe = contador > 0;// existe passa a ser true se o contador for maior que 1
+            }
+
+            conexao.close();//fecha a conexão com o banco
+
+            return existe;
+        } catch (SQLException e) {
+            throw new RuntimeException("Não foi possível fazer a verificação de usuário");
         }
-
-        conexao.close();//fecha a conexão com o banco
-
-        return existe;
     }
 
     public boolean vericarSenha(String email, String senha) throws SQLException, ClassNotFoundException {
@@ -194,10 +206,18 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
         conexao.close();//fecha a conexão com o banco
 
-        return igual;
+        if (igual) {
+            return true;
+        } else {
+            throw new RuntimeException("Senha incorreta");
+        }
     }
 
     public boolean verificarSenhasIguaisCadastro(String senha, String confirmacaoSenha) {
-        return senha.equals(confirmacaoSenha);
+        if (senha.equals(confirmacaoSenha)) {
+            return true;
+        } else {
+            throw new RuntimeException("As senhas devem ser iguais");
+        }
     }
 }

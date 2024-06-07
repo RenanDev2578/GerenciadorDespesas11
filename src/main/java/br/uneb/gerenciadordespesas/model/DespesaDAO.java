@@ -53,7 +53,6 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
         //atribui os valores de cada coluna ao objeto despesa
         while (resultSet.next()) {
-            despesa.setId(resultSet.getInt("ID"));
             despesa.setCategoria(Categoria.valueOf(resultSet.getString("CATEGORIA")));
             despesa.setDataVencimento(resultSet.getDate("DATA_VENCIMENTO").toLocalDate());
             despesa.setEmailUsuario(resultSet.getString("EMAIL_USUARIO"));
@@ -83,7 +82,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
         //atribui os valores de cada coluna para cada objeto despesa e adiciona ela na lista
         while (resultSet.next()) {
-            Despesa despesa = new Despesa(resultSet.getInt("ID"), resultSet.getString("NOME"),
+            Despesa despesa = new Despesa(resultSet.getString("NOME"),
                     resultSet.getDouble("PRECO"),
                     Categoria.valueOf(resultSet.getString("CATEGORIA")),
                     resultSet.getDate("DATA_VENCIMENTO").toLocalDate(),
@@ -143,7 +142,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
             updateNome(despesa, nomeAntigo);
         }
 
-        sql = "UPDATE DESPESA SET PRECO = ?, CATEGORIA = ?, DATA_VENCIMENTO = ?, PAGO = ?, NOME = ? WHERE EMAIL_USUARIO = ? AND ID = ?;";//string com o código SQL
+        sql = "UPDATE DESPESA SET PRECO = ?, CATEGORIA = ?, DATA_VENCIMENTO = ?, PAGO = ?, NOME = ? WHERE EMAIL_USUARIO = ? AND NOME = ?;";//string com o código SQL
 
         conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
@@ -156,7 +155,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
         preparedStatement.setBoolean(4, despesa.isPago());
         preparedStatement.setString(5, despesa.getNome());
         preparedStatement.setString(6, despesa.getEmailUsuario());
-        preparedStatement.setInt(7, despesa.getId());
+        preparedStatement.setString(7, despesa.getNome());
 
         preparedStatement.executeUpdate();//executa o comando SQL
 

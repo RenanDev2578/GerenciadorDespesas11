@@ -9,31 +9,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.4000244140625" prefWidth="433.599951171875" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaLoginController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="E-mail" />
-                  <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Senha" />
-                  <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <Button fx:id="botaoEntrar" disable="true" mnemonicParsing="false" onAction="#botaoEntrarAcao" text="Entrar" />
-         </children>
-      </VBox>
-   </children>
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaLoginController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <VBox alignment="CENTER" style="-fx-background-color: #1f4e79;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="47.0" text="E-mail" textFill="#e0e0e0">
+                            <font>
+                                <Font name="Agency FB" size="20.0" />
+                            </font></Label>
+                        <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="47.0" text="Senha" textFill="#e0e0e0">
+                            <font>
+                                <Font name="Agency FB" size="20.0" />
+                            </font></Label>
+                        <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" />
+                    </children>
+                </HBox>
+                <Button fx:id="botaoEntrar" disable="true" mnemonicParsing="false" onAction="#botaoEntrarAcao" prefHeight="37.0" prefWidth="204.0" style="-fx-background-color: #e0e0e0;" text="Entrar" textFill="#1f4e79" />
+            </children>
+        </VBox>
+    </children>
 </GridPane>

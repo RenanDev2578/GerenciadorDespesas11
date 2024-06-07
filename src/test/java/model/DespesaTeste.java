@@ -20,16 +20,6 @@ public class DespesaTeste {
     }
 
     @Test
-    public void idTeste() {
-        assertEquals(0, despesa.getId());// testando o get
-
-        int idDespesa = 6;
-        despesa.setId(idDespesa);//atribuindo valor ao id
-
-        assertEquals(idDespesa, despesa.getId());// testando se o set mudou o valor
-    }
-
-    @Test
     public void nomeTeste() {
         assertNull(despesa.getNome());// testando o get
 

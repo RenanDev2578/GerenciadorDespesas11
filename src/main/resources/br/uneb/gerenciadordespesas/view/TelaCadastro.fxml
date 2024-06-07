@@ -9,43 +9,60 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaCadastroController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
-               <children>
-                  <Label text="Nome" />
-                  <TextField fx:id="fieldNome" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
-               <children>
-                  <Label text="E-mail" />
-                  <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
-               <children>
-                  <Label text="Senha" />
-                  <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
-               <children>
-                  <Label text="Confirme a senha" />
-                  <PasswordField fx:id="fieldConfirmaSenha" onKeyReleased="#verificarTexto" />
-               </children>
-            </HBox>
-            <Button fx:id="botaoCadastro" disable="true" mnemonicParsing="false" onAction="#botaoCadastroAcao" text="CADASTRAR-SE" />
-         </children>
-      </VBox>
-   </children>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="625.0" style="-fx-background-color: #1f4e79;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaCadastroController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+                    <children>
+                        <Label prefHeight="24.0" prefWidth="44.0" text="Nome:" textFill="#e0e0e0">
+                            <font>
+                                <Font name="Agency FB" size="20.0" />
+                            </font></Label>
+                        <TextField fx:id="fieldNome" onKeyReleased="#verificarTexto" prefHeight="25.0" prefWidth="137.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+                    <children>
+                        <Label prefHeight="24.0" prefWidth="47.0" text="E-mail:" textFill="#e0e0e0">
+                            <font>
+                                <Font name="Agency FB" size="20.0" />
+                            </font></Label>
+                        <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" prefHeight="25.0" prefWidth="139.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+                    <children>
+                        <Label prefHeight="30.0" prefWidth="64.0" text="Senha:" textFill="#e0e0e0">
+                            <font>
+                                <Font size="20.0" />
+                            </font></Label>
+                        <PasswordField fx:id="fieldSenha" onKeyReleased="#verificarTexto" prefHeight="25.0" prefWidth="131.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+                    <children>
+                        <Label prefHeight="30.0" prefWidth="163.0" text="Confirme a senha:" textFill="#e0e0e0">
+                            <font>
+                                <Font size="20.0" />
+                            </font></Label>
+                        <PasswordField fx:id="fieldConfirmaSenha" onKeyReleased="#verificarTexto" />
+                    </children>
+                </HBox>
+                <Button fx:id="botaoCadastro" disable="true" mnemonicParsing="false" onAction="#botaoCadastroAcao" prefHeight="47.0" prefWidth="123.0" style="-fx-background-color: e0e0e0;" text="Cadastre-se" textFill="#1f4e79">
+                    <font>
+                        <Font name="Agency FB" size="20.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
 </GridPane>

@@ -1,5 +1,6 @@
 package br.uneb.gerenciadordespesas.controller;
 
+import br.uneb.gerenciadordespesas.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +17,12 @@ public class TelaAdDespController {
     @FXML
     private Button botaoDesp;
 
-    public void setUsuario(){
+    private Usuario usuario;
+
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
+
     @FXML
     void BotaoDespAcao(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp2.fxml"));
