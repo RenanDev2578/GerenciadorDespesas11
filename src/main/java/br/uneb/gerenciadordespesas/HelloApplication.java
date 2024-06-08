@@ -2,8 +2,6 @@ package br.uneb.gerenciadordespesas;
 
 import br.uneb.gerenciadordespesas.bancodados.Tabelas;
 import br.uneb.gerenciadordespesas.controller.TrocarTela;
-import br.uneb.gerenciadordespesas.model.Usuario;
-import br.uneb.gerenciadordespesas.util.Email;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

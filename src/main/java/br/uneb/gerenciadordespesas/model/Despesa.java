@@ -2,6 +2,8 @@ package br.uneb.gerenciadordespesas.model;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public final class Despesa {
 
@@ -77,13 +79,6 @@ public final class Despesa {
 
     @Override
     public String toString() {
-        return "Despesa{" +
-                "nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", categoria=" + categoria +
-                ", dataVencimento=" + dataVencimento +
-                ", pago=" + pago +
-                ", emailUsuario='" + emailUsuario + '\'' +
-                '}';
+    return nome + "   " + getPrecoFormatado() + "   " + (isPago() ? "PAGO" : "PENDENTE") + "   " + DateTimeFormatter.ofPattern      ("dd/MMMM/yyyy", new Locale("pt", "BR")).format(getDataVencimento()) + "   " + getCategoria().getNome();
     }
 }

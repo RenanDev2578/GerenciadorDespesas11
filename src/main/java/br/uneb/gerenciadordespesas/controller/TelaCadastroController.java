@@ -9,8 +9,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-import java.io.IOException;
-
 public class TelaCadastroController {
 
     @FXML
@@ -29,7 +27,7 @@ public class TelaCadastroController {
     private PasswordField fieldSenha;
 
     @FXML
-    void botaoCadastroAcao(ActionEvent event) throws IOException {
+    void botaoCadastroAcao(ActionEvent event) {
         String email = fieldEmail.getText();
         String nome = fieldNome.getText();
         String senha = fieldSenha.getText();

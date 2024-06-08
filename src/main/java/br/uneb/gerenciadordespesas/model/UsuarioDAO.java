@@ -43,6 +43,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
     @Override
     public Usuario read(String email, String x) {
+        Usuario usuario;
         try {
             sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";//string com o código SQL
 
@@ -55,7 +56,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
             ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso só vai retornar 1 porque email é chave primária
 
-            Usuario usuario = new Usuario();
+            usuario = new Usuario();
 
             //atribui os valores de cada coluna ao objeto usuário
             while (resultSet.next()) {
@@ -70,94 +71,112 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
             }
 
             conexao.close();//fecha a conexão com o banco
-
-            return usuario;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Erro na leitura de usuário");
+        }
+
+        return usuario;
+    }
+
+    @Override
+    public void delete(Usuario usuario) {
+        new DespesaDAO().deleteTodasDespesasUsuario(usuario.getEmail());//apaga todas as despesas do usuário
+
+        try {
+            sql = "DELETE from USUARIO where EMAIL = ?;";//string com o código SQL
+
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, usuario.getEmail());
+
+            preparedStatement.executeUpdate();//executa o comando SQL
+
+            conexao.commit();//confirma a alteração dentro do banco
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao deletar usuário");
         }
     }
 
     @Override
-    public void delete(Usuario usuario) throws SQLException, ClassNotFoundException {
-        new DespesaDAO().deleteTodasDespesasUsuario(usuario.getEmail());//apaga todas as despesas do usuário
-
-        sql = "DELETE from USUARIO where EMAIL = ?;";//string com o código SQL
-
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
-
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
-
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, usuario.getEmail());
-
-        preparedStatement.executeUpdate();//executa o comando SQL
-
-        conexao.commit();//confirma a alteração dentro do banco
-        conexao.close();//fecha a conexão com o banco
-    }
-
-    @Override
-    public void update(Usuario usuario, String emailAntigo) throws SQLException, ClassNotFoundException {
+    public void update(Usuario usuario, String emailAntigo) {
 
         //faz o update do email se os 2 forem diferentes
         if (!usuario.getEmail().equals(emailAntigo)) {
             updateEmail(usuario.getEmail(), emailAntigo);
         }
 
-        sql = "UPDATE USUARIO SET NOME = ?, SENHA = ? WHERE EMAIL = ?;";//string com o código SQL
+        try {
+            sql = "UPDATE USUARIO SET NOME = ?, SENHA = ? WHERE EMAIL = ?;";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, usuario.getNome());
-        preparedStatement.setString(2, usuario.getSenha());
-        preparedStatement.setString(3, usuario.getEmail());
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, usuario.getNome());
+            preparedStatement.setString(2, usuario.getSenha());
+            preparedStatement.setString(3, usuario.getEmail());
 
-        preparedStatement.executeUpdate();//executa o comando SQL
+            preparedStatement.executeUpdate();//executa o comando SQL
 
-        conexao.commit();//confirma a alteração dentro do banco
-        conexao.close();//fecha a conexão com o banco
+            conexao.commit();//confirma a alteração dentro do banco
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar usuário");
+        }
     }
 
-    private void updateEmail(String emailNovo, String emailAntigo) throws SQLException, ClassNotFoundException {
-        sql = "UPDATE USUARIO SET EMAIL = ? WHERE EMAIL = ?;";//string com o código SQL
+    private void updateEmail(String emailNovo, String emailAntigo) {
+        try {
+            sql = "UPDATE USUARIO SET EMAIL = ? WHERE EMAIL = ?;";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, emailNovo);
-        preparedStatement.setString(2, emailAntigo);
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, emailNovo);
+            preparedStatement.setString(2, emailAntigo);
 
-        preparedStatement.executeUpdate();//executa o comando SQL
+            preparedStatement.executeUpdate();//executa o comando SQL
 
-        conexao.commit();//confirma a alteração dentro do banco
-        conexao.close();//fecha a conexão com o banco
+            conexao.commit();//confirma a alteração dentro do banco
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar email do usuário");
+        }
     }
 
-    protected void updateValores(Usuario usuario) throws SQLException, ClassNotFoundException {
-        sql = "UPDATE USUARIO SET VALOR_TOTAL = ?, VALOR_PAGO = ?, VALOR_PENDENTE = ? WHERE EMAIL = ?;";//string com o código SQL
+    protected void updateValores(Usuario usuario) {
+        try {
+            sql = "UPDATE USUARIO SET VALOR_TOTAL = ?, VALOR_PAGO = ?, VALOR_PENDENTE = ? WHERE EMAIL = ?;";//string com o código SQL
 
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-        //define os valores dos ? na string sql
-        preparedStatement.setDouble(1, usuario.getValorTotal());
-        preparedStatement.setDouble(2, usuario.getValorPago());
-        preparedStatement.setDouble(3, usuario.getValorPendente());
-        preparedStatement.setString(4, usuario.getEmail());
+            //define os valores dos ? na string sql
+            preparedStatement.setDouble(1, usuario.getValorTotal());
+            preparedStatement.setDouble(2, usuario.getValorPago());
+            preparedStatement.setDouble(3, usuario.getValorPendente());
+            preparedStatement.setString(4, usuario.getEmail());
 
-        preparedStatement.executeUpdate();//executa o comando SQL
+            preparedStatement.executeUpdate();//executa o comando SQL
 
-        conexao.commit();//confirma a alteração dentro do banco
-        conexao.close();//fecha a conexão com o banco
+            conexao.commit();//confirma a alteração dentro do banco
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar os valores");
+        }
     }
 
     public boolean verificarExistenciaUsuario(String email) {
+        boolean existe;
+
         try {
             sql = "SELECT COUNT(*) FROM USUARIO WHERE EMAIL = ?;";//string com o código SQL
 
@@ -170,7 +189,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
             ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso vai retornar 0 se o usuário não existe e 1 se já existe
 
-            boolean existe = false;
+            existe = false;
 
             if (resultSet.next()) {
                 int contador = resultSet.getInt(1);//pegar o quantidade retornada do SQL
@@ -178,33 +197,36 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
             }
 
             conexao.close();//fecha a conexão com o banco
-
-            return existe;
         } catch (SQLException e) {
-            throw new RuntimeException("Não foi possível fazer a verificação de usuário");
+            throw new RuntimeException("Não foi possível fazer a verificação de existência do usuário");
         }
+
+        return existe;
     }
 
-    public boolean vericarSenha(String email, String senha) throws SQLException, ClassNotFoundException {
-        sql = "SELECT USUARIO.SENHA FROM USUARIO WHERE EMAIL = ?;";//string com o código SQL
-
-        conexao = ConexaoBanco.conectar();//abre a conexão com o banco
-
-        preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
-
-        //define os valores dos ? na string sql
-        preparedStatement.setString(1, email);
-
-        ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso vai retornar 1 coluna com a senha salva
-
+    public boolean vericarSenha(String email, String senha) {
         boolean igual = false;
+        try {
+            sql = "SELECT USUARIO.SENHA FROM USUARIO WHERE EMAIL = ?;";//string com o código SQL
 
-        while (resultSet.next()) {
-            String senhaSalva = resultSet.getString(1);//pegar a senha retornada do SQL
-            igual = senhaSalva.equals(senha);// igual passa a ser true se as senhas forem iguais
+            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+
+            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+
+            //define os valores dos ? na string sql
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso vai retornar 1 coluna com a senha salva
+
+            while (resultSet.next()) {
+                String senhaSalva = resultSet.getString(1);//pegar a senha retornada do SQL
+                igual = senhaSalva.equals(senha);// igual passa a ser true se as senhas forem iguais
+            }
+
+            conexao.close();//fecha a conexão com o banco
+        } catch (SQLException e) {
+            throw new RuntimeException("Não foi possível verificar a senha");
         }
-
-        conexao.close();//fecha a conexão com o banco
 
         if (igual) {
             return true;

@@ -16,20 +16,12 @@ public class TelaEntradaController {
 
     @FXML
     void BotaoEntrarAcao(ActionEvent event) throws IOException {
-        try {
-            TrocarTela.login(event);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        TrocarTela.login(event);
     }
 
     @FXML
     void botaoCadastroAcao(ActionEvent event) throws IOException {
-        try {
-            TrocarTela.cadastro(event);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        TrocarTela.cadastro(event);
     }
 
 }

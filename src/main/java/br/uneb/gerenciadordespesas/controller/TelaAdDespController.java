@@ -32,7 +32,7 @@ public class TelaAdDespController {
         stage.setScene(scene);
 
         TelaAdDesp2Controller telaAdDesp2Controller = loader.getController();
-        telaAdDesp2Controller.setUsuario();
+        //telaAdDesp2Controller.setUsuario();
 
         stage.show();
     }
