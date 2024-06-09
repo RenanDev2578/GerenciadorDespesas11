@@ -5,6 +5,7 @@ import br.uneb.gerenciadordespesas.model.Despesa;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.security.SecureRandom;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 
@@ -33,7 +34,7 @@ public class DespesaTeste {
     public void precoTeste() {
         assertEquals(0, despesa.getPreco());// testando o get
 
-        double precoDespesa = 15;
+        double precoDespesa = new SecureRandom().nextDouble();
         despesa.setPreco(precoDespesa);//atribuindo valor ao preco
 
         assertEquals(precoDespesa, despesa.getPreco());// testando se o set mudou o valor

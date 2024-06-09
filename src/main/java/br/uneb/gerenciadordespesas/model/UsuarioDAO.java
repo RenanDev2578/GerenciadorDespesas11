@@ -42,7 +42,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
     }
 
     @Override
-    public Usuario read(String email, String x) {
+    public Usuario read(String email, String ignore) {
         Usuario usuario;
         try {
             sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";//string com o código SQL
