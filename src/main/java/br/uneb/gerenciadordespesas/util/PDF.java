@@ -22,7 +22,7 @@ public class PDF {
             PDPage pagina = new PDPage();
             documento.addPage(pagina);
 
-            String mesAtual = DateTimeFormatter.ofPattern("MMMM", new Locale("pt", "BR")).format(LocalDate.now());
+            String mesAtual = DateTimeFormatter.ofPattern("MMMM", new Locale("pt", "BR")).format(LocalDate.now()); // string com o nome do mes atual
 
             // inicio do titulo
             String titulo = "Relatório do mês de " + mesAtual + "/" + LocalDate.now().getYear();
