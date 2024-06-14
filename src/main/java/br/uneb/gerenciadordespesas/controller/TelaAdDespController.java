@@ -1,39 +1,52 @@
 package br.uneb.gerenciadordespesas.controller;
 
 import br.uneb.gerenciadordespesas.model.Usuario;
+import br.uneb.gerenciadordespesas.util.PDF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
 
 public class TelaAdDespController {
+
     @FXML
     private Button botaoDesp;
 
+    @FXML
+    private Button botaoVoltarlogin;
+
+    @FXML
+    private Button relatorioPDF;
+
     private Usuario usuario;
 
-    public void setUsuario(Usuario usuario){
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
     @FXML
-    void BotaoDespAcao(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp2.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-
-        TelaAdDesp2Controller telaAdDesp2Controller = loader.getController();
-        //telaAdDesp2Controller.setUsuario();
-
-        stage.show();
+    void BotaoDespAcao(ActionEvent event) {
+        try {
+            TrocarTela.adicionarDespesa2(usuario, event);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    @FXML
+    void botaoVoltarloginAcao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void relatorioPDFAcao(ActionEvent event) {
+        try {
+            if (!PDF.verificarPDFExiste(usuario)) {
+                PDF.gerar(usuario);
+            }
+            PDF.abrirPDF(usuario);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

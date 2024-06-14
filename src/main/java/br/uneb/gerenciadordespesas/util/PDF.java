@@ -7,6 +7,8 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class PDF {
+
+    private final static String CAMINHO_PADRAO_PDF = "src/main/resources/br/uneb/gerenciadordespesas/pdfs/";
 
     public static void gerar(Usuario usuario) {
 
@@ -78,9 +82,31 @@ public class PDF {
 
             String nomePDF = usuario.getEmail() + mesAtual + LocalDate.now().getYear() + ".pdf";
 
-            documento.save("src/main/resources/br/uneb/gerenciadordespesas/pdfs/" + nomePDF);
+            documento.save(CAMINHO_PADRAO_PDF + nomePDF);
         } catch (IOException e) {
             throw new RuntimeException("Não foi possível gerar o pdf");
         }
+    }
+
+    public static void abrirPDF(Usuario usuario) {
+        Desktop desktop = Desktop.getDesktop();
+
+        String mesAtual = DateTimeFormatter.ofPattern("MMMM", new Locale("pt", "BR")).format(LocalDate.now());
+        String nomePDF = usuario.getEmail() + mesAtual + LocalDate.now().getYear() + ".pdf";
+
+        try {
+            desktop.open(new File(CAMINHO_PADRAO_PDF + nomePDF));
+        } catch (IOException e) {
+            throw new RuntimeException("O pdf não foi encontrado");
+        }
+    }
+
+    public static boolean verificarPDFExiste(Usuario usuario) {
+        String mesAtual = DateTimeFormatter.ofPattern("MMMM", new Locale("pt", "BR")).format(LocalDate.now());
+        String nomePDF = usuario.getEmail() + mesAtual + LocalDate.now().getYear() + ".pdf";
+
+        File arquivo = new File(CAMINHO_PADRAO_PDF + nomePDF);
+
+        return arquivo.exists();
     }
 }

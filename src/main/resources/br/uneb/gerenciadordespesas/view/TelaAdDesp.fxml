@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #1f4e79;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaAdDespController">
     <columnConstraints>
@@ -20,10 +19,11 @@
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="540.0">
                     <children>
-                        <Button fx:id="botaoDesp" layoutY="4.0" mnemonicParsing="false" onAction="#BotaoDespAcao" prefHeight="35.0" prefWidth="103.0" style="-fx-background-color: e0e0e0;" text="Adicionar despesas" textFill="#1f4e79">
-                            <font>
-                                <Font name="Agency FB" size="13.0" />
-                            </font></Button>
+                        <Button fx:id="botaoDesp" layoutX="89.0" layoutY="11.0" mnemonicParsing="false" onAction="#BotaoDespAcao" prefHeight="35.0" prefWidth="103.0" text="Adicionar despesas" />
+                        <Button fx:id="botaoVoltarlogin" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoVoltarloginAcao" text="Voltar" textFill="#1f4e79" />
+                        <Button layoutX="215.0" layoutY="11.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="103.0" text="Listar Despesas" />
+                        <Button fx:id="relatorioPDF" layoutX="336.0" layoutY="11.0" mnemonicParsing="false" onAction="#relatorioPDFAcao" prefHeight="35.0" prefWidth="127.0" text="Imprimir despesas" />
+                        <Button layoutX="682.0" layoutY="16.0" mnemonicParsing="false" text="Button" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="598.0" />

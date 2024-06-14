@@ -7,6 +7,7 @@ module br.uneb.gerenciadordespesas {
     requires java.desktop;
     requires javafx.swing;
     requires org.apache.pdfbox;
+    requires java.management;
 
 
     opens br.uneb.gerenciadordespesas.controller to javafx.fxml;

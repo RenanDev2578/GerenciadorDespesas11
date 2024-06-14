@@ -15,25 +15,33 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
     @Override
     public void create(Despesa despesa) {
         try {
-            sql = "INSERT INTO DESPESA(NOME, PRECO, DATA_VENCIMENTO, CATEGORIA, PAGO, EMAIL_USUARIO) VALUES (?, ?, ?, ?, ?, ?);";//string com o código SQL
+            for (int i = 0; i < despesa.getQuantidadeParcelas(); i++) {
+                sql = "INSERT INTO DESPESA(NOME, PRECO, QUANTIDADE_PARCELAS, NUMERO_PARCELA, DATA_VENCIMENTO, CATEGORIA, PAGO, EMAIL_USUARIO) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";//string com o código SQL
 
-            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
+                conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
+                preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
-            //define os valores dos ? na string sql
-            preparedStatement.setString(1, despesa.getNome());
-            preparedStatement.setDouble(2, despesa.getPreco());
-            preparedStatement.setDate(3, Date.valueOf(despesa.getDataVencimento()));
-            preparedStatement.setString(4, despesa.getCategoria().toString());
-            preparedStatement.setBoolean(5, despesa.isPago());
-            preparedStatement.setString(6, despesa.getEmailUsuario());
+                //define os valores dos ? na string sql
+                preparedStatement.setString(1, despesa.getNome());
+                preparedStatement.setDouble(2, despesa.getPreco());
+                preparedStatement.setInt(3, despesa.getQuantidadeParcelas());
+                preparedStatement.setInt(4, despesa.getNumeroParcela());
+                preparedStatement.setDate(5, Date.valueOf(despesa.getDataVencimento()));
+                preparedStatement.setString(6, despesa.getCategoria().toString());
+                preparedStatement.setBoolean(7, despesa.isPago());
+                preparedStatement.setString(8, despesa.getEmailUsuario());
 
-            preparedStatement.executeUpdate();//executa o comando SQL
+                preparedStatement.executeUpdate();//executa o comando SQL
 
-            conexao.commit();//confirma a alteração dentro do banco
-            preparedStatement.close();
-            conexao.close();//fecha a conexão com o banco
+                conexao.commit();//confirma a alteração dentro do banco
+                preparedStatement.close();
+                conexao.close();//fecha a conexão com o banco
+
+                despesa.setNumeroParcela(despesa.getNumeroParcela() + 1);
+                despesa.setDataVencimento(despesa.getDataVencimento().plusMonths(1));
+                despesa.setPago(false);
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Não foi possível criar a despesa");
         }
@@ -65,6 +73,8 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
                 despesa.setNome(resultSet.getString("NOME"));
                 despesa.setPago(resultSet.getBoolean("PAGO"));
                 despesa.setPreco(resultSet.getDouble("PRECO"));
+                despesa.setQuantidadeParcelas(resultSet.getInt("QUANTIDADE_PARCELAS"));
+                despesa.setNumeroParcela(resultSet.getInt("NUMERO_PARCELA"));
             }
 
             preparedStatement.close();
@@ -95,7 +105,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
             //atribui os valores de cada coluna para cada objeto despesa e adiciona ela na lista
             while (resultSet.next()) {
                 Despesa despesa = new Despesa(resultSet.getString("NOME"),
-                        resultSet.getDouble("PRECO"),
+                        resultSet.getDouble("PRECO"), resultSet.getInt("QUANTIDADE_PARCELAS"), resultSet.getInt("NUMERO_PARCELA"),
                         Categoria.valueOf(resultSet.getString("CATEGORIA")),
                         resultSet.getDate("DATA_VENCIMENTO").toLocalDate(),
                         resultSet.getBoolean("PAGO"),
