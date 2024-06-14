@@ -1,5 +1,7 @@
 package br.uneb.gerenciadordespesas.controller;
 
+import br.uneb.gerenciadordespesas.model.empresarial.Empresa;
+import br.uneb.gerenciadordespesas.model.empresarial.EmpresaDAO;
 import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import br.uneb.gerenciadordespesas.model.individual.UsuarioDAO;
 import javafx.event.ActionEvent;
@@ -10,13 +12,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-public class TelaLoginController {
+public class TelaLoginEmpresaController {
 
     @FXML
     private Button botaoEntrar;
 
     @FXML
-    private TextField fieldEmail;
+    private TextField fieldCNPJ;
 
     @FXML
     private PasswordField fieldSenha;
@@ -26,21 +28,20 @@ public class TelaLoginController {
 
     @FXML
     void botaoEntrarAcao(ActionEvent event) {
-
-        String email = fieldEmail.getText();
+        String cnpj = fieldCNPJ.getText();
         String senha = fieldSenha.getText();
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        EmpresaDAO empresaDAO = new EmpresaDAO();
 
         try {
-            if (usuarioDAO.verificarExistenciaUsuario(email)) {
-                if (usuarioDAO.vericarSenha(email, senha)) {
-                    Usuario usuario = usuarioDAO.read(email, senha);
+            if (empresaDAO.verificarExistenciaEmpresa(cnpj)) {
+                if (empresaDAO.vericarSenha(cnpj, senha)) {
+                    Empresa empresa = empresaDAO.read(cnpj, "");
 
-                    TrocarTela.principal(usuario, event);
+                    //TrocarTela.principal(usuario, event);
                 }
             } else {
-                throw new RuntimeException("Usuário inexistente");
+                throw new RuntimeException("Empresa inexistente");
             }
         } catch (RuntimeException e) {
             labelErro.setText(e.getMessage());
@@ -49,6 +50,7 @@ public class TelaLoginController {
 
     @FXML
     void verificarTexto(KeyEvent event) {
-        botaoEntrar.setDisable(fieldEmail.getText().isEmpty() || fieldSenha.getText().isEmpty());
+        botaoEntrar.setDisable(fieldCNPJ.getText().isEmpty() || fieldSenha.getText().isEmpty());
     }
+
 }

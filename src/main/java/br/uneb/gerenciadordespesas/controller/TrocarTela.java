@@ -1,6 +1,6 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -92,23 +92,6 @@ public class TrocarTela {
 
             TelaAdDespController telaAdDespController = loader.getController();
             telaAdDespController.setUsuario(usuario);
-
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Arquivo fxml não encontrado");
-        }
-    }
-
-    public static void adicionarDespesa2(Usuario usuario, ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaAdDesp2.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            TelaAdDesp2Controller telaAdDesp2Controller = loader.getController();
-            telaAdDesp2Controller.setUsuario(usuario);
 
             stage.show();
         } catch (IOException e) {

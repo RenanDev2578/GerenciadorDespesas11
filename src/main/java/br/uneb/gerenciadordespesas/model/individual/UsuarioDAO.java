@@ -1,6 +1,7 @@
-package br.uneb.gerenciadordespesas.model;
+package br.uneb.gerenciadordespesas.model.individual;
 
 import br.uneb.gerenciadordespesas.bancodados.ConexaoBanco;
+import br.uneb.gerenciadordespesas.model.InterfaceDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +44,6 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
     @Override
     public Usuario read(String email, String ignore) {
-        Usuario usuario;
         try {
             sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";//string com o código SQL
 
@@ -56,7 +56,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
 
             ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso só vai retornar 1 porque email é chave primária
 
-            usuario = new Usuario();
+            Usuario usuario = new Usuario();
 
             //atribui os valores de cada coluna ao objeto usuário
             while (resultSet.next()) {
@@ -71,11 +71,11 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
             }
 
             conexao.close();//fecha a conexão com o banco
+
+            return usuario;
         } catch (SQLException e) {
             throw new RuntimeException("Erro na leitura de usuário");
         }
-
-        return usuario;
     }
 
     @Override

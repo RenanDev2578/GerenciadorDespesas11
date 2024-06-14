@@ -1,6 +1,6 @@
 package model;
 
-import br.uneb.gerenciadordespesas.model.Categoria;
+import br.uneb.gerenciadordespesas.model.individual.Categoria;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

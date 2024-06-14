@@ -1,7 +1,7 @@
 package model;
 
-import br.uneb.gerenciadordespesas.model.Categoria;
-import br.uneb.gerenciadordespesas.model.Despesa;
+import br.uneb.gerenciadordespesas.model.individual.Categoria;
+import br.uneb.gerenciadordespesas.model.individual.Despesa;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

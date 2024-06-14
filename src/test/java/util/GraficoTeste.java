@@ -1,6 +1,6 @@
 package util;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import br.uneb.gerenciadordespesas.util.Grafico;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

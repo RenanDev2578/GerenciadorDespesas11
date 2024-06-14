@@ -1,6 +1,8 @@
 package br.uneb.gerenciadordespesas.util;
 
-import br.uneb.gerenciadordespesas.model.*;
+import br.uneb.gerenciadordespesas.model.individual.Categoria;
+import br.uneb.gerenciadordespesas.model.individual.Despesa;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Node;
 import org.jfree.chart.ChartFactory;

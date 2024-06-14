@@ -1,6 +1,7 @@
-package br.uneb.gerenciadordespesas.model;
+package br.uneb.gerenciadordespesas.model.individual;
 
 import br.uneb.gerenciadordespesas.bancodados.ConexaoBanco;
+import br.uneb.gerenciadordespesas.model.InterfaceDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +50,6 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
     @Override
     public Despesa read(String nomeDespesa, String emailUsuario) {
-        Despesa despesa;
         try {
             sql = "SELECT * FROM DESPESA WHERE NOME = ? AND EMAIL_USUARIO = ?;";//string com o código SQL
 
@@ -63,7 +63,7 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
             ResultSet resultSet = preparedStatement.executeQuery();//executa o comando SQL e retorna um conjunto de resultados; nesse caso só vai retornar 1 porque email é chave primária
 
-            despesa = new Despesa();
+            Despesa despesa = new Despesa();
 
             //atribui os valores de cada coluna ao objeto despesa
             while (resultSet.next()) {
@@ -79,16 +79,17 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
             preparedStatement.close();
             conexao.close();//fecha a conexão com o banco
+
+            return despesa;
         } catch (SQLException e) {
             throw new RuntimeException("Não foi possível ler a despesa");
         }
-
-        return despesa;
     }
 
     protected List<Despesa> readTodas(String emailUsuario) {
-        List<Despesa> despesas;//cria uma lista de despesas
         try {
+            List<Despesa> despesas;//cria uma lista de despesas
+
             sql = "SELECT * FROM DESPESA WHERE EMAIL_USUARIO = ?;";//string com o código SQL
 
             conexao = ConexaoBanco.conectar();//abre a conexão com o banco
@@ -116,11 +117,11 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
 
             preparedStatement.close();
             conexao.close();//fecha a conexão com o banco
+
+            return despesas;
         } catch (SQLException e) {
             throw new RuntimeException("Não foi possível ler as despesas do usuário");
         }
-
-        return despesas;
     }
 
     @Override

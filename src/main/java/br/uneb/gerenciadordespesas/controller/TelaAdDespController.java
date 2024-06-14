@@ -1,21 +1,31 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
-import br.uneb.gerenciadordespesas.util.PDF;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
 public class TelaAdDespController {
 
     @FXML
-    private Button botaoDesp;
+    private Button botaovoltar;
 
     @FXML
-    private Button botaoVoltarlogin;
+    private Button btnAdicionarDespesa;
 
     @FXML
-    private Button relatorioPDF;
+    private DatePicker datePicker;
+
+    @FXML
+    private TextField txtNomeDespesa;
+
+    @FXML
+    private TextField txtParcelas;
+
+    @FXML
+    private TextField txtValorDespesa;
 
     private Usuario usuario;
 
@@ -24,26 +34,14 @@ public class TelaAdDespController {
     }
 
     @FXML
-    void BotaoDespAcao(ActionEvent event) {
-        try {
-            TrocarTela.adicionarDespesa2(usuario, event);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @FXML
-    void botaoVoltarloginAcao(ActionEvent event) {
+    void adicionarDespesa(ActionEvent event) {
 
     }
 
     @FXML
-    void relatorioPDFAcao(ActionEvent event) {
+    void botaoVoltarAcao(ActionEvent event) {
         try {
-            if (!PDF.verificarPDFExiste(usuario)) {
-                PDF.gerar(usuario);
-            }
-            PDF.abrirPDF(usuario);
+            TrocarTela.adicionarDespesa(usuario, event);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }

@@ -1,10 +1,11 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
-import br.uneb.gerenciadordespesas.model.UsuarioDAO;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.UsuarioDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -27,6 +28,9 @@ public class TelaCadastroController {
     private PasswordField fieldSenha;
 
     @FXML
+    private Label labelErro;
+
+    @FXML
     void botaoCadastroAcao(ActionEvent event) {
         String email = fieldEmail.getText();
         String nome = fieldNome.getText();
@@ -42,11 +46,13 @@ public class TelaCadastroController {
 
                     usuarioDAO.create(usuario);
 
-                    TrocarTela.adicionarDespesa(usuario, event);
+                    TrocarTela.principal(usuario, event);
                 }
+            } else {
+                throw new RuntimeException("Usuário já existe");
             }
         } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+            labelErro.setText(e.getMessage());
         }
     }
 

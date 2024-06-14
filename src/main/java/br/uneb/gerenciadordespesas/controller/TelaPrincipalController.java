@@ -1,28 +1,52 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.Usuario;
-import br.uneb.gerenciadordespesas.util.Grafico;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
+import br.uneb.gerenciadordespesas.util.PDF;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-
-import java.time.Month;
-import java.time.Year;
+import javafx.scene.control.Button;
 
 public class TelaPrincipalController {
 
+    @FXML
+    private Button botaoDesp;
+
+    @FXML
+    private Button botaoVoltarlogin;
+
+    @FXML
+    private Button relatorioPDF;
+
     private Usuario usuario;
-
-    @FXML
-    private GridPane gridPane;
-
-    @FXML
-    private Label label;
-
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        this.gridPane.getChildren().add(Grafico.gerarGraficoPizza(usuario, Month.MAY, Year.now()));
+    }
+
+    @FXML
+    void BotaoDespAcao(ActionEvent event) {
+        try {
+            TrocarTela.adicionarDespesa(usuario, event);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    void botaoVoltarloginAcao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void relatorioPDFAcao(ActionEvent event) {
+        try {
+            if (!PDF.verificarPDFExiste(usuario)) {
+                PDF.gerar(usuario);
+            }
+            PDF.abrirPDF(usuario);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaLoginController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaLoginEmpresaController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
@@ -20,15 +20,15 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <VBox alignment="CENTER" style="-fx-background-color: #1f4e79;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <VBox alignment="CENTER" style="-fx-background-color: #1f7970;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label prefHeight="17.0" prefWidth="47.0" text="E-mail" textFill="#e0e0e0">
+                        <Label prefHeight="17.0" prefWidth="47.0" text="CNPJ" textFill="#e0e0e0">
                             <font>
                                 <Font name="Agency FB" size="20.0" />
                             </font></Label>
-                        <TextField fx:id="fieldEmail" onKeyReleased="#verificarTexto" />
+                        <TextField fx:id="fieldCNPJ" onKeyReleased="#verificarTexto" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -41,14 +41,14 @@
                     </children>
                 </HBox>
                 <Button fx:id="botaoEntrar" disable="true" mnemonicParsing="false" onAction="#botaoEntrarAcao" prefHeight="37.0" prefWidth="204.0" style="-fx-background-color: #e0e0e0;" text="Entrar" textFill="#1f4e79" />
-            <Label fx:id="labelErro" alignment="CENTER" textFill="RED">
-               <font>
-                  <Font name="Agency FB" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
+                <Label fx:id="labelErro" alignment="CENTER" textFill="RED">
+                    <font>
+                        <Font name="Agency FB" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
             </children>
         </VBox>
     </children>

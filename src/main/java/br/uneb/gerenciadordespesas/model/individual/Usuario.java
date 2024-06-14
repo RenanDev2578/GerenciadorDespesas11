@@ -1,4 +1,4 @@
-package br.uneb.gerenciadordespesas.model;
+package br.uneb.gerenciadordespesas.model.individual;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

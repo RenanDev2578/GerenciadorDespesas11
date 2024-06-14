@@ -1,4 +1,4 @@
-package br.uneb.gerenciadordespesas.model;
+package br.uneb.gerenciadordespesas.model.individual;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;

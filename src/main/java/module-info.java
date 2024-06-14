@@ -15,4 +15,6 @@ module br.uneb.gerenciadordespesas {
     exports br.uneb.gerenciadordespesas.model;
     exports br.uneb.gerenciadordespesas.controller;
     opens br.uneb.gerenciadordespesas.view to javafx.fxml;
+    exports br.uneb.gerenciadordespesas.model.individual;
+    exports br.uneb.gerenciadordespesas.model.empresarial;
 }

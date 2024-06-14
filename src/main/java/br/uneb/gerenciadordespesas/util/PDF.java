@@ -1,7 +1,7 @@
 package br.uneb.gerenciadordespesas.util;
 
-import br.uneb.gerenciadordespesas.model.Despesa;
-import br.uneb.gerenciadordespesas.model.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.Despesa;
+import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
