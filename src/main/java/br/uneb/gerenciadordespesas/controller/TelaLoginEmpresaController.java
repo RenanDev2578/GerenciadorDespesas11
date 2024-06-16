@@ -38,7 +38,7 @@ public class TelaLoginEmpresaController {
                 if (empresaDAO.vericarSenha(cnpj, senha)) {
                     Empresa empresa = empresaDAO.read(cnpj, "");
 
-                    //TrocarTela.principal(usuario, event);
+
                 }
             } else {
                 throw new RuntimeException("Empresa inexistente");

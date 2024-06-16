@@ -18,7 +18,7 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
     @Override
     public void create(Usuario usuario) {
         try {
-            sql = "INSERT INTO USUARIO (EMAIL, SENHA, NOME, VALOR_TOTAL, VALOR_PENDENTE, VALOR_PAGO) VALUES (?, ?, ?, ?, ?, ?);";//string com o código SQL
+            sql = "INSERT INTO USUARIO (EMAIL, SENHA, NOME) VALUES (?, ?, ?);";//string com o código SQL
 
             conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
@@ -28,9 +28,6 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
             preparedStatement.setString(1, usuario.getEmail());
             preparedStatement.setString(2, usuario.getSenha());
             preparedStatement.setString(3, usuario.getNome());
-            preparedStatement.setDouble(4, usuario.getValorTotal());
-            preparedStatement.setDouble(5, usuario.getValorPendente());
-            preparedStatement.setDouble(6, usuario.getValorPago());
 
             preparedStatement.executeUpdate();//executa o comando SQL
 
@@ -63,9 +60,6 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
                 usuario.setEmail(resultSet.getString("EMAIL"));
                 usuario.setNome(resultSet.getString("NOME"));
                 usuario.setSenha(resultSet.getString("SENHA"));
-                usuario.setValorTotal(resultSet.getDouble("VALOR_TOTAL"));
-                usuario.setValorPendente(resultSet.getDouble("VALOR_PENDENTE"));
-                usuario.setValorPago(resultSet.getDouble("VALOR_PAGO"));
 
                 usuario.setDespesas(new DespesaDAO().readTodas(usuario.getEmail()));//carrega a lista de despesas do usuário
             }
@@ -148,29 +142,6 @@ public class UsuarioDAO implements InterfaceDAO<Usuario> {
             conexao.close();//fecha a conexão com o banco
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar email do usuário");
-        }
-    }
-
-    protected void updateValores(Usuario usuario) {
-        try {
-            sql = "UPDATE USUARIO SET VALOR_TOTAL = ?, VALOR_PAGO = ?, VALOR_PENDENTE = ? WHERE EMAIL = ?;";//string com o código SQL
-
-            conexao = ConexaoBanco.conectar();//abre a conexão com o banco
-
-            preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
-
-            //define os valores dos ? na string sql
-            preparedStatement.setDouble(1, usuario.getValorTotal());
-            preparedStatement.setDouble(2, usuario.getValorPago());
-            preparedStatement.setDouble(3, usuario.getValorPendente());
-            preparedStatement.setString(4, usuario.getEmail());
-
-            preparedStatement.executeUpdate();//executa o comando SQL
-
-            conexao.commit();//confirma a alteração dentro do banco
-            conexao.close();//fecha a conexão com o banco
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar os valores");
         }
     }
 

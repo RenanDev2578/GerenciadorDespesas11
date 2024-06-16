@@ -4,28 +4,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #1f4e79;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaEntradaController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #1f4e79;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaEntradaController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="248.0" minHeight="10.0" prefHeight="145.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="395.0" minHeight="252.0" prefHeight="355.0" />
     </rowConstraints>
-    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="625.0">
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="625.0" style="-fx-alignment: center;" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <children>
-            <Label prefHeight="52.0" prefWidth="603.0" text="                                    Bem vindo!" textFill="#e0e0e0">
-                <font>
-                    <Font name="Agency FB" size="34.0" />
-                </font>
-            </Label>
-            <Button fx:id="botaoCadastro" mnemonicParsing="false" onAction="#botaoCadastroAcao" prefHeight="57.0" prefWidth="157.0" style="-fx-background-color: #e0e0e0;" text="CADASTRO" textFill="#1f4e79" />
-            <HBox prefHeight="16.0" prefWidth="172.0" />
-            <Button fx:id="botaoEntrar" mnemonicParsing="false" onAction="#BotaoEntrarAcao" prefHeight="46.0" prefWidth="113.0" style="-fx-background-color: #e0e0e0;" text="LOGIN" textFill="#1f4e79" />
+            <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+                <Label prefHeight="31.0" prefWidth="98.0" text="Olá Usuário!" textFill="#e0e0e0">
+                    <font>
+                        <Font name="Agency FB" size="25.0" />
+                    </font>
+                </Label>
+                <Button fx:id="botaoCadastro" mnemonicParsing="false" onAction="#botaoCadastroAcao" prefHeight="57.0" prefWidth="157.0" style="-fx-background-color: #e0e0e0;" text="CADASTRO" textFill="#1f4e79" />
+                <Button fx:id="botaoEntrar" mnemonicParsing="false" onAction="#BotaoEntrarAcao" prefHeight="46.0" prefWidth="113.0" style="-fx-background-color: #e0e0e0;" text="LOGIN" textFill="#1f4e79" />
+                <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                    <children>
+
+                    </children>
+                </VBox>
+            </VBox>
         </children>
     </VBox>
 </GridPane>

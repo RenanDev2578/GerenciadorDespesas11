@@ -251,10 +251,19 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
             throw new RuntimeException("Não foi possivel verificar o nome da despesa");
         }
 
-        if (existe) {
-            return true;
+        if (!existe) {
+            return false;
         } else {
             throw new RuntimeException("O nome de despesa já esta cadastrado");
         }
+    }
+
+    public Categoria pegarCategoria(String stringCategoria) {
+        for (Categoria categoria : Categoria.values()) {
+            if (categoria.getNome().equals(stringCategoria)) {
+                return categoria;
+            }
+        }
+        return null;
     }
 }

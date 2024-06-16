@@ -23,7 +23,7 @@ public class TrocarTela {
             stage.setScene(scene);
 
             TelaPrincipalController telaPrincipal = loader.getController();
-            telaPrincipal.setUsuario(usuario);
+            telaPrincipal.iniciar(usuario);
 
             stage.show();
         } catch (IOException e) {
@@ -91,8 +91,60 @@ public class TrocarTela {
             stage.setScene(scene);
 
             TelaAdDespController telaAdDespController = loader.getController();
-            telaAdDespController.setUsuario(usuario);
+            telaAdDespController.iniciar(usuario);
 
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void loginempresa(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaLoginEmpresa.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void cadastroempresa(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaCadastroEmpresa.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void entradaempresa(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaEntradaEmpresa.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void hibrida(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaHibrida.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException("Arquivo fxml não encontrado");

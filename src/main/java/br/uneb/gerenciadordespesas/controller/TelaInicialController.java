@@ -11,6 +11,6 @@ public class TelaInicialController {
 
     @FXML
     void BotaoiniciarAcao(ActionEvent event) {
-        TrocarTela.entrada(event);
+        TrocarTela.hibrida(event);
     }
 }
