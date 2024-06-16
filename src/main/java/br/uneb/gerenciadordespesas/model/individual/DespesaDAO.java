@@ -264,6 +264,6 @@ public class DespesaDAO implements InterfaceDAO<Despesa> {
                 return categoria;
             }
         }
-        return null;
+        return Categoria.SEMCATEGORIA;
     }
 }

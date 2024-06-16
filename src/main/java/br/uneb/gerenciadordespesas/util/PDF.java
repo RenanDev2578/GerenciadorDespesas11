@@ -100,13 +100,4 @@ public class PDF {
             throw new RuntimeException("O pdf não foi encontrado");
         }
     }
-
-    public static boolean verificarPDFExiste(Usuario usuario) {
-        String mesAtual = DateTimeFormatter.ofPattern("MMMM", new Locale("pt", "BR")).format(LocalDate.now());
-        String nomePDF = usuario.getEmail() + mesAtual + LocalDate.now().getYear() + ".pdf";
-
-        File arquivo = new File(CAMINHO_PADRAO_PDF + nomePDF);
-
-        return arquivo.exists();
-    }
 }

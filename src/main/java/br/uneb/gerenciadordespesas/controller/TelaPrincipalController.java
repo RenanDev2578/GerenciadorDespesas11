@@ -1,7 +1,9 @@
 package br.uneb.gerenciadordespesas.controller;
 
 import br.uneb.gerenciadordespesas.model.individual.Despesa;
+import br.uneb.gerenciadordespesas.model.individual.DespesaDAO;
 import br.uneb.gerenciadordespesas.model.individual.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.UsuarioDAO;
 import br.uneb.gerenciadordespesas.util.PDF;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +26,9 @@ public class TelaPrincipalController {
 
     @FXML
     private Button botaoDesp;
+
+    @FXML
+    private Button botaoExcluir;
 
     @FXML
     private Button botaoSairlogin;
@@ -113,7 +118,17 @@ public class TelaPrincipalController {
 
     @FXML
     void listaDespesasAcao(MouseEvent event) {
+        botaoExcluir.setDisable(false);
+    }
 
+    @FXML
+    void botaoExcluirAcao(ActionEvent event) {
+        Despesa despesaSelecionada = listaDespesas.getFocusModel().getFocusedItem();
+
+        new DespesaDAO().delete(despesaSelecionada);
+
+        usuario = new UsuarioDAO().read(usuario.getEmail(), "");
+        TrocarTela.principal(usuario, event);
     }
 
     @FXML
@@ -124,9 +139,7 @@ public class TelaPrincipalController {
     @FXML
     void relatorioPDFAcao(ActionEvent event) {
         try {
-            if (!PDF.verificarPDFExiste(usuario)) {
-                PDF.gerar(usuario);
-            }
+            PDF.gerar(usuario);
             PDF.abrirPDF(usuario);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

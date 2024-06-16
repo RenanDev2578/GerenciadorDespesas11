@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-image: Let's-organize2.0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaInicialController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaInicialController">
+
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
@@ -24,16 +25,15 @@
         </ImageView>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <ImageView fitHeight="273.0" fitWidth="263.0" pickOnBounds="true">
+                <ImageView fitHeight="330.0" fitWidth="573.0" pickOnBounds="true">
                     <image>
-                        <Image url="@../Logo/let's_organize.png" />
+                        <Image url="@../Logo/Let's-organize2.0" />
                     </image>
                 </ImageView>
-                <Button fx:id="botaoiniciar" mnemonicParsing="false" onAction="#BotaoiniciarAcao" prefHeight="59.0" prefWidth="141.0" style="-fx-background-color: #e0e0e0;" text="Vamos lá!" textFill="#1f4e79">
+                <Button fx:id="botaoiniciar" mnemonicParsing="false" onAction="#BotaoiniciarAcao" prefHeight="59.0" prefWidth="141.0" styleClass="glass-button" text="Vamos lá!" textFill="#085d79">
                     <font>
-                        <Font name="Agency FB" size="22.0" />
-                    </font>
-                </Button>
+                        <Font name="Agency FB" size="27.0" />
+                    </font></Button>
             </children>
         </VBox>
     </children>

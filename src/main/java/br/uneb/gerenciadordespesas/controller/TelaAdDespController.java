@@ -1,12 +1,10 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.individual.Categoria;
-import br.uneb.gerenciadordespesas.model.individual.Despesa;
-import br.uneb.gerenciadordespesas.model.individual.DespesaDAO;
-import br.uneb.gerenciadordespesas.model.individual.Usuario;
+import br.uneb.gerenciadordespesas.model.individual.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 
 import java.time.LocalDate;
 
@@ -31,13 +29,13 @@ public class TelaAdDespController {
     private TextField txtValorDespesa;
 
     @FXML
-    private Label nomeUser;
-
-    @FXML
     private ChoiceBox<String> escolhaCategoria;
 
     @FXML
     private CheckBox marcarPago;
+
+    @FXML
+    private Label labelErro;
 
     private Usuario usuario;
 
@@ -45,10 +43,10 @@ public class TelaAdDespController {
         this.usuario = usuario;
 
         for (Categoria categoria : Categoria.values()) {
-            escolhaCategoria.getItems().add(categoria.getNome());
+            if (categoria != Categoria.SEMCATEGORIA) {
+                escolhaCategoria.getItems().add(categoria.getNome());
+            }
         }
-
-        nomeUser.setText(nomeUser.getText() + usuario.getNome().toUpperCase());
     }
 
     @FXML
@@ -57,13 +55,6 @@ public class TelaAdDespController {
             DespesaDAO despesaDAO = new DespesaDAO();
 
             String nomeDespesa = txtNomeDespesa.getText();
-
-            int parcelas;
-            try {
-                parcelas = Integer.parseInt(txtParcelas.getText());
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("O campo parcelas deve ser um número inteiro");
-            }
 
             LocalDate data = datePicker.getValue();
 
@@ -74,10 +65,17 @@ public class TelaAdDespController {
                 throw new RuntimeException("O campo valor deve ser um número");
             }
 
-            Categoria categoria = despesaDAO.pegarCategoria(escolhaCategoria.getSelectionModel().getSelectedItem());
-            if (categoria == null) {
-                categoria = Categoria.SEMCATEGORIA;
+            int parcelas;
+            try {
+                parcelas = Integer.parseInt(txtParcelas.getText());
+                if (parcelas < 1) {
+                    throw new RuntimeException("O campo parcelas deve ser maior que 0");
+                }
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("O campo parcelas deve ser um número inteiro");
             }
+
+            Categoria categoria = despesaDAO.pegarCategoria(escolhaCategoria.getSelectionModel().getSelectedItem());
 
             boolean pago = marcarPago.isSelected();
 
@@ -85,13 +83,13 @@ public class TelaAdDespController {
                 Despesa despesa = new Despesa(nomeDespesa, valor, parcelas, 1, categoria, data, pago, usuario.getEmail());
 
                 despesaDAO.create(despesa);
-                usuario.getDespesas().add(despesa);
+                usuario = new UsuarioDAO().read(usuario.getEmail(), "");
 
                 TrocarTela.principal(usuario, event);
             }
 
         } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+            labelErro.setText(e.getMessage());
         }
     }
 
@@ -102,6 +100,11 @@ public class TelaAdDespController {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @FXML
+    void verificarTexto(KeyEvent event) {
+        btnAdicionarDespesa.setDisable(txtNomeDespesa.getText().isEmpty() || txtParcelas.getText().isEmpty() || txtValorDespesa.getText().isEmpty());
     }
 
 }

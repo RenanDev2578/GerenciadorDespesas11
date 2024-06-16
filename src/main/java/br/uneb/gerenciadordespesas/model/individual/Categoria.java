@@ -13,6 +13,7 @@ public enum Categoria {
     OUTROS("Outros"),
     SEMCATEGORIA("Sem categoria");
 
+
     private final String nome;
 
     Categoria(String nome) {
@@ -21,10 +22,5 @@ public enum Categoria {
 
     public String getNome() {
         return nome;
-    }
-
-    @Override
-    public String toString() {
-        return this.getNome();
     }
 }

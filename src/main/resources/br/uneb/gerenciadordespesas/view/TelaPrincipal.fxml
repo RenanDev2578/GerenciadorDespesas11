@@ -27,6 +27,7 @@
                         <Button fx:id="botaoSairlogin" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoSairloginAcao" text="Sair" textFill="#1f4e79" />
                         <Button fx:id="relatorioPDF" layoutX="246.0" layoutY="11.0" mnemonicParsing="false" onAction="#relatorioPDFAcao" prefHeight="35.0" prefWidth="127.0" text="Imprimir despesas" />
                         <Button fx:id="botaoGraficos" layoutX="668.0" layoutY="13.0" mnemonicParsing="false" onAction="#botaoGraficosAcao" text="Gráficos" />
+                  <Button fx:id="botaoExcluir" disable="true" layoutX="400.0" layoutY="13.0" mnemonicParsing="false" onAction="#botaoExcluirAcao" prefHeight="30.0" prefWidth="127.0" text="Excluir despesa" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="598.0">

@@ -9,24 +9,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaHibridaController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaHibridaController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <VBox alignment="CENTER" prefHeight="500.0" prefWidth="696.0" style="-fx-background-color: #1f4e79;">
+    <VBox alignment="CENTER" prefHeight="526.0" prefWidth="777.0" style="-fx-background-color: #d7d4b0;">
         <children>
-            <Label text="SEJA BEM VINDO!" textFill="#e1d646">
+            <Label text="SEJA BEM VINDO!" textFill="#1f4e79">
                 <font>
                     <Font name="Agency FB" size="36.0" />
                 </font>
             </Label>
 
-            <Button fx:id="botaoUsuario" mnemonicParsing="false" onAction="#BotaoUsuarioAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #e0e0e0;" text="USO PESSOAL" textFill="#1f4e79" />
+            <Button fx:id="botaoUsuario" mnemonicParsing="false" onAction="#BotaoUsuarioAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f7970;" text="USO PESSOAL" textFill="#fdfeff" />
             <HBox prefHeight="16.0" prefWidth="172.0" />
-            <Button fx:id="botaoEmpresa" mnemonicParsing="false" onAction="#botaoEmpresaAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #e0e0e0;" text="EMPRESA" textFill="#1f4e79" />
+            <Button fx:id="botaoEmpresa" mnemonicParsing="false" onAction="#botaoEmpresaAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f4e79;" text="EMPRESA" textFill="#ebebeb" />
         </children>
     </VBox>
 
