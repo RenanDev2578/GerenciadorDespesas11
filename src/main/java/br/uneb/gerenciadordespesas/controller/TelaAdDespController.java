@@ -31,6 +31,9 @@ public class TelaAdDespController {
     private TextField txtValorDespesa;
 
     @FXML
+    private Label nomeUser;
+
+    @FXML
     private ChoiceBox<String> escolhaCategoria;
 
     @FXML
@@ -44,6 +47,8 @@ public class TelaAdDespController {
         for (Categoria categoria : Categoria.values()) {
             escolhaCategoria.getItems().add(categoria.getNome());
         }
+
+        nomeUser.setText(nomeUser.getText() + usuario.getNome().toUpperCase());
     }
 
     @FXML
@@ -70,6 +75,9 @@ public class TelaAdDespController {
             }
 
             Categoria categoria = despesaDAO.pegarCategoria(escolhaCategoria.getSelectionModel().getSelectedItem());
+            if (categoria == null) {
+                categoria = Categoria.SEMCATEGORIA;
+            }
 
             boolean pago = marcarPago.isSelected();
 

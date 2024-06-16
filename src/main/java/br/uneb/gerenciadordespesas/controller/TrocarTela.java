@@ -150,4 +150,21 @@ public class TrocarTela {
             throw new RuntimeException("Arquivo fxml não encontrado");
         }
     }
+
+    public static void graficos(Usuario usuario, ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaGraficos.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            TelaGraficosController graficosController = loader.getController();
+            graficosController.iniciar(usuario, event);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
 }

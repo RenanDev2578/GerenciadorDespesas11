@@ -10,7 +10,8 @@ public enum Categoria {
     MERCADO("Mercado"),
     EDUCACAO("Educação"),
     TRANSPORTE("Transporte"),
-    OUTROS("Outros");
+    OUTROS("Outros"),
+    SEMCATEGORIA("Sem categoria");
 
     private final String nome;
 

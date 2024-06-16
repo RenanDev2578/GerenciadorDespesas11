@@ -1,5 +1,7 @@
 package br.uneb.gerenciadordespesas.model.individual;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +59,27 @@ public final class Usuario {
         this.despesas.add(despesa);
     }
 
+    public double pegarTotalDespesaPorMes(Month mes) {
+        return this.getDespesas().stream()
+                .filter(despesa -> despesa.getDataVencimento().getYear() == LocalDate.now().getYear() && despesa.getDataVencimento().getMonth() == mes)
+                .mapToDouble(Despesa::getPreco)
+                .sum();
+    }
+
+    public double pegarDespesaPagasPorMes(Month mes) {
+        return this.getDespesas().stream()
+                .filter(despesa -> despesa.getDataVencimento().getYear() == LocalDate.now().getYear() && despesa.getDataVencimento().getMonth() == mes && despesa.isPago())
+                .mapToDouble(Despesa::getPreco)
+                .sum();
+    }
+
+    public double pegarDespesaPendentesPorMes(Month mes) {
+        return this.getDespesas().stream()
+                .filter(despesa -> despesa.getDataVencimento().getYear() == LocalDate.now().getYear() && despesa.getDataVencimento().getMonth() == mes && !(despesa.isPago()))
+                .mapToDouble(Despesa::getPreco)
+                .sum();
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -65,5 +88,11 @@ public final class Usuario {
                 ", senha='" + senha + '\'' +
                 ", despesas=" + despesas +
                 '}';
+    }
+
+    public List<Despesa> pegarDespesasPorMes(Month mes) {
+        return this.getDespesas().stream()
+                .filter(despesa -> despesa.getDataVencimento().getMonth() == mes && despesa.getDataVencimento().getYear() == LocalDate.now().getYear())
+                .toList();
     }
 }

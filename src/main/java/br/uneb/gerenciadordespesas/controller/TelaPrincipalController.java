@@ -32,6 +32,9 @@ public class TelaPrincipalController {
     private Button relatorioPDF;
 
     @FXML
+    private Button botaoGraficos;
+
+    @FXML
     private ChoiceBox<String> escolhaMes;
 
     @FXML
@@ -52,16 +55,13 @@ public class TelaPrincipalController {
             escolhaMes.getItems().add(mesTraduzido);
         }
 
-        double somaMes = usuario.getDespesas().stream()
-                .filter(despesa -> despesa.getDataVencimento().getYear() == LocalDate.now().getYear() && despesa.getDataVencimento().getMonth() == LocalDate.now().getMonth())
-                .mapToDouble(Despesa::getPreco)
-                .sum();
+        double somaMes = usuario.pegarTotalDespesaPorMes(LocalDate.now().getMonth());
 
         labelValor.setText("Valor total do mês: " + NumberFormat.getCurrencyInstance().format(somaMes));
 
         Month mesAtual = LocalDate.now().getMonth();
 
-        listaFX = FXCollections.observableArrayList(pegarDespesaMes(mesAtual));
+        listaFX = FXCollections.observableArrayList(usuario.pegarDespesasPorMes(mesAtual));
 
         listaDespesas.setItems(listaFX);
 
@@ -71,16 +71,14 @@ public class TelaPrincipalController {
                 String mesSelecionadoTraduzido = escolhaMes.getValue();
 
                 if (mesTraduzido.equals(mesSelecionadoTraduzido)) {
-                    listaFX = FXCollections.observableArrayList(pegarDespesaMes(mes));
+                    listaFX = FXCollections.observableArrayList(usuario.pegarDespesasPorMes(mes));
 
                     listaDespesas.setItems(listaFX);
 
-                    double somaMesSelecionado = usuario.getDespesas().stream()
-                            .filter(despesa -> despesa.getDataVencimento().getYear() == LocalDate.now().getYear() && despesa.getDataVencimento().getMonth() == mes)
-                            .mapToDouble(Despesa::getPreco)
-                            .sum();
+                    double somaMesSelecionado = usuario.pegarTotalDespesaPorMes(mes);
 
                     labelValor.setText("Valor total do mês: " + NumberFormat.getCurrencyInstance().format(somaMesSelecionado));
+                    break;
                 }
             }
         });
@@ -96,8 +94,21 @@ public class TelaPrincipalController {
     }
 
     @FXML
+    void botaoGraficosAcao(ActionEvent event) {
+        try {
+            TrocarTela.graficos(usuario, event);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
     void botaoSairloginAcao(ActionEvent event) {
-        TrocarTela.hibrida(event);
+        try {
+            TrocarTela.hibrida(event);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -121,13 +132,4 @@ public class TelaPrincipalController {
             System.out.println(e.getMessage());
         }
     }
-
-    private List<Despesa> pegarDespesaMes(Month mes) {
-        int anoAtual = LocalDate.now().getYear();
-
-        return usuario.getDespesas().stream()
-                .filter(despesa -> despesa.getDataVencimento().getMonth() == mes && despesa.getDataVencimento().getYear() == anoAtual)
-                .toList();
-    }
-
 }
