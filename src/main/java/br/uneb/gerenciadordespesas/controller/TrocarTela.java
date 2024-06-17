@@ -1,5 +1,6 @@
 package br.uneb.gerenciadordespesas.controller;
 
+import br.uneb.gerenciadordespesas.model.empresarial.Empresa;
 import br.uneb.gerenciadordespesas.model.individual.Despesa;
 import br.uneb.gerenciadordespesas.model.individual.Usuario;
 import javafx.event.ActionEvent;
@@ -163,6 +164,40 @@ public class TrocarTela {
 
             TelaGraficosController graficosController = loader.getController();
             graficosController.iniciar(usuario, event);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void adicionarProduto(Empresa empresa, ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaAdicionarProduto.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            TelaAdicionarProdutoController produtoController = loader.getController();
+            produtoController.iniciar(empresa);
+
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Arquivo fxml não encontrado");
+        }
+    }
+
+    public static void principalEmpresa(Empresa empresa, ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TrocarTela.class.getResource("/br/uneb/gerenciadordespesas/view/TelaPrincipalEmpresa.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            TelaPrincipalEmpresaController empresaController = loader.getController();
+            empresaController.iniciar(empresa);
 
             stage.show();
         } catch (IOException e) {

@@ -1,10 +1,9 @@
 package br.uneb.gerenciadordespesas.controller;
 
-import br.uneb.gerenciadordespesas.model.individual.Despesa;
-import br.uneb.gerenciadordespesas.model.individual.DespesaDAO;
-import br.uneb.gerenciadordespesas.model.individual.Usuario;
-import br.uneb.gerenciadordespesas.model.individual.UsuarioDAO;
-import br.uneb.gerenciadordespesas.util.PDF;
+import br.uneb.gerenciadordespesas.model.empresarial.Empresa;
+import br.uneb.gerenciadordespesas.model.empresarial.EmpresaDAO;
+import br.uneb.gerenciadordespesas.model.empresarial.ProdutoEmpresa;
+import br.uneb.gerenciadordespesas.model.empresarial.ProdutoEmpresaDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,13 +18,12 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
-import java.util.List;
 import java.util.Locale;
 
-public class TelaPrincipalController {
+public class TelaPrincipalEmpresaController {
 
     @FXML
-    private Button botaoDesp;
+    private Button botaoAdicionar;
 
     @FXML
     private Button botaoExcluir;
@@ -34,26 +32,20 @@ public class TelaPrincipalController {
     private Button botaoSairlogin;
 
     @FXML
-    private Button relatorioPDF;
-
-    @FXML
-    private Button botaoGraficos;
-
-    @FXML
     private ChoiceBox<String> escolhaMes;
-
-    @FXML
-    private ListView<Despesa> listaDespesas;
 
     @FXML
     private Label labelValor;
 
-    private Usuario usuario;
+    @FXML
+    private ListView<ProdutoEmpresa> listaProdutos;
 
-    private ObservableList<Despesa> listaFX;
+    private ObservableList<ProdutoEmpresa> listaFX;
 
-    public void iniciar(Usuario usuario) {
-        this.usuario = usuario;
+    private Empresa empresa;
+
+    public void iniciar(Empresa empresa) {
+        this.empresa = empresa;
 
         for (Month mes : Month.values()) {
             String mesTraduzido = mes.getDisplayName(TextStyle.FULL, new Locale("pt", "BR"));
@@ -63,15 +55,15 @@ public class TelaPrincipalController {
             }
         }
 
-        double somaMes = usuario.pegarTotalDespesaPorMes(LocalDate.now().getMonth());
+        double somaMes = empresa.pegarTotalPorMes(LocalDate.now().getMonth());
 
         labelValor.setText("Valor total do mês: " + NumberFormat.getCurrencyInstance().format(somaMes));
 
         Month mesAtual = LocalDate.now().getMonth();
 
-        listaFX = FXCollections.observableArrayList(usuario.pegarDespesasPorMes(mesAtual));
+        listaFX = FXCollections.observableArrayList(empresa.pegarProdutosPorMes(mesAtual));
 
-        listaDespesas.setItems(listaFX);
+        listaProdutos.setItems(listaFX);
 
         escolhaMes.getSelectionModel().selectedItemProperty().addListener((observable, valorAntigo, valorNovo) -> {
             for (Month mes : Month.values()) {
@@ -79,11 +71,11 @@ public class TelaPrincipalController {
                 String mesSelecionadoTraduzido = escolhaMes.getValue();
 
                 if (mesTraduzido.equals(mesSelecionadoTraduzido)) {
-                    listaFX = FXCollections.observableArrayList(usuario.pegarDespesasPorMes(mes));
+                    listaFX = FXCollections.observableArrayList(empresa.pegarProdutosPorMes(mes));
 
-                    listaDespesas.setItems(listaFX);
+                    listaProdutos.setItems(listaFX);
 
-                    double somaMesSelecionado = usuario.pegarTotalDespesaPorMes(mes);
+                    double somaMesSelecionado = empresa.pegarTotalPorMes(mes);
 
                     labelValor.setText("Valor total do mês: " + NumberFormat.getCurrencyInstance().format(somaMesSelecionado));
                     break;
@@ -93,21 +85,22 @@ public class TelaPrincipalController {
     }
 
     @FXML
-    void BotaoDespAcao(ActionEvent event) {
+    void BotaoAdicionarAcao(ActionEvent event) {
         try {
-            TrocarTela.adicionarDespesa(usuario, event);
+            TrocarTela.adicionarProduto(empresa, event);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    void botaoGraficosAcao(ActionEvent event) {
-        try {
-            TrocarTela.graficos(usuario, event);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+    void botaoExcluirAcao(ActionEvent event) {
+        ProdutoEmpresa produtoSelecionado = listaProdutos.getFocusModel().getFocusedItem();
+
+        new ProdutoEmpresaDAO().delete(produtoSelecionado);
+
+        empresa = new EmpresaDAO().read(empresa.getCnpj(), "");
+        TrocarTela.principalEmpresa(empresa, event);
     }
 
     @FXML
@@ -120,32 +113,13 @@ public class TelaPrincipalController {
     }
 
     @FXML
-    void listaDespesasAcao(MouseEvent event) {
-        botaoExcluir.setDisable(false);
-    }
-
-    @FXML
-    void botaoExcluirAcao(ActionEvent event) {
-        Despesa despesaSelecionada = listaDespesas.getFocusModel().getFocusedItem();
-
-        new DespesaDAO().delete(despesaSelecionada);
-
-        usuario = new UsuarioDAO().read(usuario.getEmail(), "");
-        TrocarTela.principal(usuario, event);
-    }
-
-    @FXML
     void escolhaMesAcao(MouseEvent event) {
 
     }
 
     @FXML
-    void relatorioPDFAcao(ActionEvent event) {
-        try {
-            PDF.gerar(usuario);
-            PDF.abrirPDF(usuario);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+    void listaDespesasAcao(MouseEvent event) {
+        botaoExcluir.setDisable(false);
     }
+
 }

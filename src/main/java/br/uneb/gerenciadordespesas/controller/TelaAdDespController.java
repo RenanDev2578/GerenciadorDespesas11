@@ -47,6 +47,8 @@ public class TelaAdDespController {
                 escolhaCategoria.getItems().add(categoria.getNome());
             }
         }
+
+        datePicker.setValue(LocalDate.now());
     }
 
     @FXML

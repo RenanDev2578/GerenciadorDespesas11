@@ -49,6 +49,8 @@ public class TelaCadastroEmpresaController {
                     Empresa empresa = new Empresa(nome, cnpj, senha, email);
 
                     empresaDAO.create(empresa);
+
+                    TrocarTela.principalEmpresa(empresa, event);
                 }
             } else {
                 throw new RuntimeException("Empresa já existe");

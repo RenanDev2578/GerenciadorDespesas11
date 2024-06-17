@@ -24,6 +24,15 @@ public class TelaEntradaEmpresaController {
     }
 
     @FXML
+    void botaoVoltarAcao(ActionEvent event) {
+        try {
+            TrocarTela.hibrida(event);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
     void BotaoCadastroresaAcaoEmpresa(ActionEvent event) {
         try {
             TrocarTela.cadastroempresa(event);

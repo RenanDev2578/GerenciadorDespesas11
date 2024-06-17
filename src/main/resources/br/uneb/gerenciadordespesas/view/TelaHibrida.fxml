@@ -24,9 +24,9 @@
                 </font>
             </Label>
 
-            <Button fx:id="botaoUsuario" mnemonicParsing="false" onAction="#BotaoUsuarioAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f7970;" text="USO PESSOAL" textFill="#fdfeff" />
+            <Button fx:id="botaoUsuario" mnemonicParsing="false" onAction="#BotaoUsuarioAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f4e79;" text="USO PESSOAL" textFill="#d7d4b0" />
             <HBox prefHeight="16.0" prefWidth="172.0" />
-            <Button fx:id="botaoEmpresa" mnemonicParsing="false" onAction="#botaoEmpresaAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f4e79;" text="EMPRESA" textFill="#ebebeb" />
+            <Button fx:id="botaoEmpresa" mnemonicParsing="false" onAction="#botaoEmpresaAcao" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: #1f7970;" text="EMPRESA" textFill="#d7d4b0" />
         </children>
     </VBox>
 

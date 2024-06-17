@@ -59,6 +59,7 @@ public class ProdutoEmpresaDAO implements InterfaceDAO<ProdutoEmpresa> {
 
             //atribui os valores de cada coluna ao objeto despesa
             while (resultSet.next()) {
+                produto.setId(resultSet.getInt("id"));
                 produto.setCnpjEmpresa(resultSet.getString("cnpj_empresa"));
                 produto.setCustoMedio(resultSet.getDouble("custo_medio"));
                 produto.setDataCompra(resultSet.getDate("data_compra").toLocalDate());
@@ -81,13 +82,14 @@ public class ProdutoEmpresaDAO implements InterfaceDAO<ProdutoEmpresa> {
         try {
             conexao = ConexaoBanco.conectar();//abre a conexão com o banco
 
-            sql = "DELETE FROM PRODUTO_EMPRESA WHERE NOME = ? AND CNPJ_EMPRESA = ?;";//string com o código SQL
+            sql = "DELETE FROM PRODUTO_EMPRESA WHERE ID = ? AND NOME = ? AND CNPJ_EMPRESA = ?;";//string com o código SQL
 
             preparedStatement = conexao.prepareStatement(sql);//prepara o comando SQL para ser executado
 
             //define os valores dos ? na string sql
-            preparedStatement.setString(1, produtoEmpresa.getNome());
-            preparedStatement.setString(2, produtoEmpresa.getCnpjEmpresa());
+            preparedStatement.setInt(1, produtoEmpresa.getId());
+            preparedStatement.setString(2, produtoEmpresa.getNome());
+            preparedStatement.setString(3, produtoEmpresa.getCnpjEmpresa());
 
             preparedStatement.executeUpdate();//executa o comando SQL
 

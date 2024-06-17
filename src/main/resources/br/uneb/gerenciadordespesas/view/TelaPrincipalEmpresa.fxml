@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #1f4e79;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uneb.gerenciadordespesas.controller.TelaPrincipalEmpresaController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <SplitPane dividerPositions="0.12060301507537688" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #1f7970;">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="540.0">
+                    <children>
+                        <Button fx:id="botaoAdicionar" layoutX="89.0" layoutY="11.0" mnemonicParsing="false" onAction="#BotaoAdicionarAcao" prefHeight="35.0" prefWidth="139.0" text="Adicionar produto" />
+                        <Button fx:id="botaoSairlogin" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#botaoSairloginAcao" text="Sair" textFill="#1f4e79" />
+                        <Button fx:id="botaoExcluir" disable="true" layoutX="246.0" layoutY="13.0" mnemonicParsing="false" onAction="#botaoExcluirAcao" prefHeight="30.0" prefWidth="127.0" text="Excluir produto" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="598.0">
+                    <children>
+                        <ChoiceBox fx:id="escolhaMes" layoutX="74.0" layoutY="14.0" onMouseClicked="#escolhaMesAcao" prefWidth="150.0" />
+                        <Label layoutX="24.0" layoutY="19.0" text="MÊS:" textFill="WHITE" />
+                        <ScrollPane layoutX="54.0" layoutY="60.0" prefHeight="370.0" prefWidth="641.0">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <ListView fx:id="listaProdutos" onMouseClicked="#listaDespesasAcao" prefHeight="370.0" prefWidth="642.0" />
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                        <Label fx:id="labelValor" alignment="CENTER_RIGHT" layoutX="485.0" layoutY="10.0" prefHeight="35.0" prefWidth="210.0" />
+                    </children></AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</GridPane>

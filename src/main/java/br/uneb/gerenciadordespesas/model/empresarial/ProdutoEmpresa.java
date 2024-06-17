@@ -1,6 +1,9 @@
 package br.uneb.gerenciadordespesas.model.empresarial;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class ProdutoEmpresa {
 
@@ -97,16 +100,12 @@ public class ProdutoEmpresa {
         this.custoMedio = this.valorTotal / this.quantidade;
     }
 
+    private String getPrecoFormatado() {
+        return NumberFormat.getCurrencyInstance().format(getValorTotal());
+    }
+
     @Override
     public String toString() {
-        return "ProdutoEmpresa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", valorTotal=" + valorTotal +
-                ", quantidade=" + quantidade +
-                ", custoMedio=" + custoMedio +
-                ", dataCompra=" + dataCompra +
-                ", cnpjEmpresa='" + cnpjEmpresa + '\'' +
-                '}';
+        return nome + "   " + quantidade + " unidades   " + getPrecoFormatado() + "   " + "Custo médio: " + NumberFormat.getCurrencyInstance().format(custoMedio) + "   " + DateTimeFormatter.ofPattern("dd/MMMM/yyyy", new Locale("pt", "BR")).format(getDataCompra());
     }
 }

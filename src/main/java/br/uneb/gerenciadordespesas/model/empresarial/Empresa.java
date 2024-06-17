@@ -1,5 +1,9 @@
 package br.uneb.gerenciadordespesas.model.empresarial;
 
+import br.uneb.gerenciadordespesas.model.individual.Despesa;
+
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 public class Empresa {
@@ -69,5 +73,18 @@ public class Empresa {
                 ", email='" + email + '\'' +
                 ", produtos=" + produtos +
                 '}';
+    }
+
+    public double pegarTotalPorMes(Month mes) {
+        return this.getProdutos().stream()
+                .filter(produtoEmpresa -> produtoEmpresa.getDataCompra().getYear() == LocalDate.now().getYear() && produtoEmpresa.getDataCompra().getMonth() == mes)
+                .mapToDouble(ProdutoEmpresa::getValorTotal)
+                .sum();
+    }
+
+    public List<ProdutoEmpresa> pegarProdutosPorMes(Month mes) {
+        return this.getProdutos().stream()
+                .filter(produtoEmpresa -> produtoEmpresa.getDataCompra().getMonth() == mes && produtoEmpresa.getDataCompra().getYear() == LocalDate.now().getYear())
+                .toList();
     }
 }

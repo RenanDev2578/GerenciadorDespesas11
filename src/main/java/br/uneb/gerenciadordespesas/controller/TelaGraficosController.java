@@ -50,6 +50,9 @@ public class TelaGraficosController {
         for (Month mes : Month.values()) {
             String mesTraduzido = mes.getDisplayName(TextStyle.FULL, new Locale("pt", "BR"));
             escolhaMes.getItems().add(mesTraduzido);
+            if (mes == LocalDate.now().getMonth()) {
+                escolhaMes.setValue(mesTraduzido);
+            }
         }
 
         botaoBarraAcao(event);
